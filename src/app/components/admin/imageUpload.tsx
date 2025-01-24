@@ -3,7 +3,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import React, {  useState } from 'react';
 import "./style.css";
-import { Tooltip } from 'react-tooltip'
 
 
 interface FileDetails {
