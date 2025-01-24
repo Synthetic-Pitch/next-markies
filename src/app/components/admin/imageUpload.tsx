@@ -1,14 +1,21 @@
 'use client';
 
 import axios, { AxiosRequestConfig } from 'axios';
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import "./style.css";
+import Image from 'next/image';
 
 
 interface FileDetails {
     name: string;
     size: number;
     type: string;
+}
+type Data = {
+   name:string;
+   price:string;
+   URL:string;
+   description:string
 }
 
 const ImageUpload = () => {
@@ -18,7 +25,10 @@ const ImageUpload = () => {
     const [fileDetails, setFileDetails] = useState<FileDetails | null>(null);
     const [name,setName] = useState<string>('');
     const [price,setPrice] = useState<string>('');
-    
+    const [description,setDescription] =useState<string>('');
+    const [fixed,setFixed] = useState<Data>({name:'', price:'', URL:'',description:''});
+
+
     // Allowed image MIME types
     const ALLOWED_IMAGE_TYPES = [
         'image/jpeg', 
@@ -50,21 +60,26 @@ const ImageUpload = () => {
             e.target.value = '';
             return;
         }
-    
+        
         // Store file details
         setFileDetails({
             name: selectedFile.name,
             size: selectedFile.size,
             type: selectedFile.type
         });
-        
-        setError('ready to upload')
+        const preview = URL.createObjectURL(selectedFile);
+        setFixed({ ...fixed, URL: preview });
+        setError('ready to post')
         setFile(selectedFile);
     }
 
     const uploadImage = async() => {
         if (!file) {
             setError('Please select an image first');
+            return;
+        }
+        if(!name || !price){
+            alert('please add name or price to a product');
             return;
         }
         
@@ -89,12 +104,13 @@ const ImageUpload = () => {
            setProgress(0);
            setError('uploading...');
 
-           const res = await axios.post('/api/test/test', formData, config);
+           const res = await axios.post('/api/test/123', formData, config);
            console.log(res);
            
            setError('upload complete');
            // Reset file and progress after successful upload
            setFile(null);
+           setFixed({...fixed,name:'',price:'',URL:''})
            setFileDetails(null);
            setProgress(0);
         } catch(err) {
@@ -104,10 +120,6 @@ const ImageUpload = () => {
         }
     }
     
-
-  
-
-
     return (
         <div className=''>
            <div className='flex flex-col justify-center'>
@@ -123,33 +135,16 @@ const ImageUpload = () => {
                             className='w-[90%] h-[90%] flex justify-center items-center border-[4px] border-dotted tracking-[1px] font-roboto2 text-md text-center'
                         >{error}</label>
                     </aside>
-                    <article className='h-full w-[50%] flex flex-col justify-center gap-2'>
-                        <h2>file name: {fileDetails?.name || '-'}</h2>
-                        <h2>file size: {fileDetails ? `${(fileDetails.size / 1024).toFixed(2)} KB` : '-'}</h2>
-                        <h2>file type: {fileDetails?.type || '-'}</h2>
-                        {file && (
-                            <div className='w-full bg-gray-200 rounded-full h-2.5'>
-                                <div 
-                                    className='bg-blue-600 h-2.5 rounded-full' 
-                                    style={{width: `${progress}%`}}
-                                ></div>
-                            </div>
-                        )}
-                        {file && (
-                            <button 
-                                onClick={uploadImage}
-                                className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600'
-                            >
-                                Upload
-                            </button>
-                        )}
+                    <article className='h-full w-[50%] flex flex-col justify-center gap-2 text-[.8em] overflow-hidden ]'>
+                        <h2 className='text-[#5f5f5f]'>file name: {fileDetails?.name || '-'}</h2>
+                        <h2 className='text-[#5f5f5f]'>file size: {fileDetails ? `${(fileDetails.size / 1024).toFixed(2)} KB` : '-'}</h2>
+                        <h2 className='text-[#5f5f5f]'>file type: {fileDetails?.type || '-'}</h2>
                     </article>
                 </div>
 
-
-               <section className='pt-4 pl-4 flex flex-col gap-4'>
+               <section className='py-4 pl-4 flex flex-col gap-4'>
                     <div>
-                        <span >foods&apos;name:</span>
+                        <span >product&apos;s name:</span>
                         
                         <input 
                             title='letters only'
@@ -160,32 +155,73 @@ const ImageUpload = () => {
                                 // sort only letters allowed
                                 const letterOnly = e.target.value.replace(/\d/g,'');
                                 setName(letterOnly)
+                                setFixed({...fixed,name:letterOnly});
                             }}
                             className='outline-none pl-2 border-b-[1]'
                         />
                     </div>
                     <div>
-                        <span>foods&apos;price: &#x20B1;</span>
+                        <span>product&apos;s price: &#x20B1;</span>
                         <input 
                             type="text"
                             value={price}
                             onChange={(e)=>{
                                 const digitOnly =e.target.value.replace(/\D/g,'');
                                 setPrice(digitOnly);
+                                setFixed({...fixed,price:digitOnly});
                             }}
                             placeholder='enter..'
-                            className='pl-1 outline-none'    
+                            className='pl-1 outline-none' 
                         />
                     </div>
-                    <hr />
+                    <div className='flex'>
+                        <span className='pr-2'>description:</span>
+                        <textarea 
+                            name="" id="" 
+                            placeholder='enter...'
+                            className='grow mr-4 border-2 px-2 text-[gray] border-[#c0c0c0] rounded-xl outline-none'
+                            rows={4}
+                            value={description}
+                            onChange={(e)=>setDescription(e.target.value)}
+                        />
+                    </div>
+                    
                </section>
            </div>
-            
-           <div className='flex justify-center pt-2'>
-                <button className='px-6 py-2 text-xl border-2 bg-[#cccccc] tracking-widest font-roboto2 rounded-xl '>
+
+           { fixed.name.length !== 0 && fixed.price.length !== 0 && fixed.URL.length > 0 &&
+             <div className='bg-[#eeeeee] py-2 mt-2 flex flex-col items-center'>
+                <div className=''>
+                    <Image
+                        src={fixed.URL}
+                        alt=''
+                        height={100} width={100}
+                        className='max-h-[200px] w-auto'
+                    />
+                </div>
+                <div className='text-[1.2em] text-[gray]'>
+                    <h2 className='font-test text-[1.5em] text-[gray]'> -{name}</h2>
+                    <h2 className='font-bold text-[gray]'> &#x20B1; {price}</h2>
+                   
+                </div>
+             </div>
+          }
+
+           <div className='flex flex-col items-center gap-2'>
+                <div className='w-full bg-gray-200 rounded-full h-1'>
+                    <div 
+                        className='bg-blue-600 h-1 rounded-full' 
+                        style={{width: `${progress}%`}}
+                    ></div>
+                </div>
+                <button
+                    onClick={uploadImage} 
+                    className='px-6 py-2 text-xl border-2 bg-[#cccccc] tracking-widest font-roboto2 rounded-xl w-[40%] '>
                     POST
                 </button>
            </div>
+                            
+        
         </div>
     );
 };
