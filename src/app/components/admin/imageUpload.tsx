@@ -202,7 +202,7 @@ const ImageUpload = () => {
                 <div className='text-[1.2em] text-[gray]'>
                     <h2 className='font-test text-[1.5em] text-[gray]'> -{name}</h2>
                     <h2 className='font-bold text-[gray]'> &#x20B1; {price}</h2>
-                   
+                    
                 </div>
              </div>
           }
