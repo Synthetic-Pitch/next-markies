@@ -1,10 +1,10 @@
 'use client';
 
 import axios, { AxiosRequestConfig } from 'axios';
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import "./style.css";
 import { Tooltip } from 'react-tooltip'
-import { initialState } from '../../redux/Slider';
+
 
 interface FileDetails {
     name: string;
@@ -17,8 +17,8 @@ const ImageUpload = () => {
     const [error, setError] = useState<string>('upload image');
     const [progress, setProgress] = useState<number>(0);
     const [fileDetails, setFileDetails] = useState<FileDetails | null>(null);
-    const [tooltip,setTooltip] = useState<boolean>(false);
-
+    const [name,setName] = useState<string>('');
+    const [price,setPrice] = useState<string>('');
     
     // Allowed image MIME types
     const ALLOWED_IMAGE_TYPES = [
@@ -106,8 +106,7 @@ const ImageUpload = () => {
     }
     
 
-
-
+  
 
 
     return (
@@ -147,25 +146,36 @@ const ImageUpload = () => {
                         )}
                     </article>
                 </div>
-                        
+
 
                <section className='pt-4 pl-4 flex flex-col gap-4'>
                     <div>
-                        <span data-tooltip-id='my-tooltip' data-tooltip-content="hello world">foods&apos;name:</span>
-                         <Tooltip id='my-tooltip' is/>
+                        <span >foods&apos;name:</span>
+                        
                         <input 
                             title='letters only'
                             type="text"
                             placeholder='enter..'
+                            value={name}
+                            onChange={(e)=>{
+                                // sort only letters allowed
+                                const letterOnly = e.target.value.replace(/\d/g,'');
+                                setName(letterOnly)
+                            }}
                             className='outline-none pl-2 border-b-[1]'
                         />
                     </div>
                     <div>
-                        <span>foods&apos;name:</span>
+                        <span>foods&apos;price: &#x20B1;</span>
                         <input 
-                            type="text" 
+                            type="text"
+                            value={price}
+                            onChange={(e)=>{
+                                const digitOnly =e.target.value.replace(/\D/g,'');
+                                setPrice(digitOnly);
+                            }}
                             placeholder='enter..'
-                            className='pl-2 outline-none'    
+                            className='pl-1 outline-none'    
                         />
                     </div>
                     <hr />
