@@ -69,11 +69,13 @@ const ImageUpload = () => {
         });
         const preview = URL.createObjectURL(selectedFile);
         setFixed({ ...fixed, URL: preview });
-        setError('ready to post')
+        setError('ready to post');
         setFile(selectedFile);
     }
 
     const uploadImage = async() => {
+        console.log(file);
+        
         if (!file) {
             setError('Please select an image first');
             return;
@@ -85,6 +87,7 @@ const ImageUpload = () => {
         
         const formData = new FormData();
         formData.append('image', file);
+        console.log(formData);
         
         // Configuration for tracking upload progress
         const config: AxiosRequestConfig = {
@@ -103,14 +106,17 @@ const ImageUpload = () => {
            // Reset progress before starting
            setProgress(0);
            setError('uploading...');
-
-           const res = await axios.post('/api/test/123', formData, config);
-           console.log(res);
+        
+           await axios.post('/api/test', formData, config);
+           
            
            setError('upload complete');
            // Reset file and progress after successful upload
+           setName('')
+           setDescription('')
+           setPrice('')
            setFile(null);
-           setFixed({...fixed,name:'',price:'',URL:''})
+           setFixed({...fixed,name:'',price:'',URL:'',description:''})
            setFileDetails(null);
            setProgress(0);
         } catch(err) {
@@ -176,13 +182,17 @@ const ImageUpload = () => {
                     </div>
                     <div className='flex'>
                         <span className='pr-2'>description:</span>
-                        <textarea 
+                        <textarea
                             name="" id="" 
                             placeholder='enter...'
                             className='grow mr-4 border-2 px-2 text-[gray] border-[#c0c0c0] rounded-xl outline-none'
                             rows={4}
                             value={description}
-                            onChange={(e)=>setDescription(e.target.value)}
+                            onChange={(e)=>{
+                                const currentValue = e.target.value;
+                                setDescription(currentValue)
+                                setFixed({...fixed,description:currentValue})
+                            }}
                         />
                     </div>
                     
@@ -202,7 +212,6 @@ const ImageUpload = () => {
                 <div className='text-[1.2em] text-[gray]'>
                     <h2 className='font-test text-[1.5em] text-[gray]'> -{name}</h2>
                     <h2 className='font-bold text-[gray]'> &#x20B1; {price}</h2>
-                    
                 </div>
              </div>
           }
@@ -221,7 +230,8 @@ const ImageUpload = () => {
                 </button>
            </div>
                             
-        
+          <button className='text-7xl' onClick={()=>{console.log(fixed);
+          }}>Render</button>
         </div>
     );
 };

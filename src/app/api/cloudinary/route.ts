@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
         if (!file) {
             return NextResponse.json({ message: 'no provided file' }, { status: 400 });
         }
-
+        
         // Convert File to Buffer for Cloudinary upload
         const arrayBuffer = await file.arrayBuffer();
         const fileBuffer = Buffer.from(arrayBuffer);
