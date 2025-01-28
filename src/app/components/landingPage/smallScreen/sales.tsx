@@ -8,10 +8,10 @@ import DscImg3 from "../../../../../public/assets/landingPage/pic-3.jpg"
 
 const Sales = () => {
     return (
-        <div className='bg-[teal]'>
+        <div className='bg-gradient-to-bl from-[teal] to-[#006464]'>
             <header className='relative'>
-                <h1 className='text-center font-test text-8xl break-all'>BIGGEST </h1>
-                <h1 className='text-center font-test text-8xl break-all'>SALE </h1>
+                <h1 className='text-center font-test text-8xl break-all text-[white]'>BIGGEST </h1>
+                <h1 className='text-center font-test text-8xl break-all text-[white]'>SALE </h1>
             </header>
             <main className='relative'>
                 <section className="flex flex-col items-center sxs:flex-row justify-center  pb-4">
@@ -32,47 +32,48 @@ const Sales = () => {
                     <article 
                         className="w-full h-auto sxs:w-[50%] flex flex-col items-center"
                     >
-                        <h1 className='text-center text-3xl font-test tracking-wider inline-block mx-auto text-[#a31515] p-4 sxs:p-0'>Gnar Steak</h1>
+                        <h1 className='text-center text-3xl font-test tracking-wider inline-block mx-auto text-[#b98484] p-4 sxs:p-0'>Gnar Steak</h1>
                         <p className='text-center text-sm px-2'>The native steak of the Gnar tribe, known for its rich flavor and tender texture. Perfect for any occasion, from a casual dinner to a grand feast.</p>
                     </article>
                 </section>
                 
-                <section className='flex flex-col justify-center sxs:flex-row items-center pb-4'>
-                    <article className='h-40 w-full flex flex-col'>
-                        <h1 className='text-3xl font-test text-center py-2 text-[#a31515] '>
-                            Fa-Si Burito
-                        </h1>
-                        <p className='text-center px-2'>Cant escape the taste of the Fa-Si Burito, a delicious blend of spices and flavors that will leave you craving more</p>
-                        <button className='text-[#f7f8fa] text-xl pt-4 underline'>order now</button>
-                    </article>
-                    <figure className='relative h-[20rem] w-full order-first sxs:order-last'>
+                
+                <section className="flex flex-col items-center sxs:flex-row justify-center  pb-4">
+                    <figure className="relative w-full h-[15rem] sxs:w-[50%] sxs:h-[300px] flex justify-center items-center">
                         <Image
                             src={Img2}
-                            alt=''
+                            alt="Sale image showcasing products"
                             fill
-                            className='object-fill sxs:object-contain'
+                            className='object-fll sxs:object-contain'
+                            priority
                         />
                         <Image
                             src={DscImg2}
-                            alt='' height={100} width={100}
-                            className='absolute -top-5 -left-1 h-[70px] w-[70px] sxs:top-2'
+                            alt=''
+                            className='absolute -top-4 sxs:top-2 sxs:-right-2 right-0 h-[70px] w-auto'
                         />
                     </figure>
+                    <article 
+                        className="w-full h-auto sxs:w-[50%] flex flex-col items-center sxs:order-first"
+                    >
+                        <h1 className='text-center text-3xl font-test tracking-wider inline-block mx-auto text-[#7cac55] p-4 sxs:p-0'>Fa-si Burito</h1>
+                        <p className='text-center text-sm px-2'>The native steak of the Gnar tribe, known for its rich flavor and tender texture. Perfect for any occasion, from a casual dinner to a grand feast.</p>
+                        <button className='py-2 text-[white] text-xl '>order now</button>
+                    </article>
                 </section>
 
-                <section>
-                    <figure className='relative'>
-                        <div className='absolute bg-gradient-to-b from-[black] to-[transparent] h-60 w-full'>
-                            <h2 
-                                className='text-[white] text-4xl pl-2 pt-2 font-tinapa tracking-wider'
-                            >Pam&apos;s Steaky Shrimp</h2>
+                <section className='flex justify-center items-center'>
+                    <figure className='w-[100%] sxs:w-[90%] relative'>
+                        <div className='h-[70%] w-full absolute top-0 bg-gradient-to-b from-[#242424] to-transparent'>
+                            <h2 className='text-[white] font-tinapa pt-2 pl-2 tracking-wider text-2xl'>PAM&apos;S STEAKY SHRIMP</h2>
                         </div>
                         <Image
                             src={DscImg3} alt=''
-                            className='max-h-[27rem]'
+                            className='object-contain'
                         />
                     </figure>
                 </section>
+                
             </main>
         </div>
     );
