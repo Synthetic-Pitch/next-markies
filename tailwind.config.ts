@@ -21,7 +21,8 @@ export default {
         foreground: "var(--foreground)",
       },
       screens:{
-        xs:'546px'
+        xs:'546px',
+        sxs:'308px'
       }
     },
   },

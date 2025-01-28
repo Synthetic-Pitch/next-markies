@@ -10,61 +10,59 @@ const Scroller = () => {
           <Image 
             src="/assets/landingPage/scroll-1.jpg"
             alt=""
-            height={100} width={100}
-            className='h-[100%] w-[100%]'
+            height={100} width={120}
+            className='w-full h-full '
           />
         </div>
         <div className='h-full w-[240px] bg-[cyan]'>
           <Image 
             src="/assets/landingPage/scroll-2.jpg"
             alt=""
-            height={100} width={100}
-            className='h-[100%] w-[100%]'
+           height={100} width={120}
+             className='w-full h-full'
           />
         </div>
         <div className='h-full w-[240px] bg-[cyan]'>
           <Image 
             src="/assets/landingPage/scroll-3.jpg"
             alt=""
-            height={100} width={100}
-            className='h-[100%] w-[100%]'
+           height={100} width={140}
+             className='w-full h-full '
           />
         </div>
         <div className='h-full w-[240px] bg-[cyan]'>
-          <Image 
+          <Image
             src="/assets/landingPage/scroll-4.jpg"
             alt=""
-            height={100} width={100}
-            className='h-[100%] w-[100%]'
+           height={100} width={120}
+            className='w-full h-full'
           />
         </div>
         <div className='h-full w-[240px] bg-[cyan]'>
           <Image 
             src="/assets/landingPage/scroll-5.jpg"
             alt=""
-            height={100} width={100}
-            className='h-[100%] w-[100%]'
+            height={100} width={120}
+            className='w-full h-full'
           />
         </div>
         <div className='h-full w-[240px] bg-[cyan]'>
           <Image 
             src="/assets/landingPage/scroll-6.jpg"
             alt=""
-            height={100} width={100}
-            className='h-[100%] w-[100%]'
+            height={100} width={120}
+            className='w-full h-full'
           />
         </div>
         <div className='h-full w-[240px] bg-[cyan]'>
           <Image 
             src="/assets/landingPage/scroll-7.jpg"
             alt=""
-            height={100} width={100}
-            className='h-[100%] w-[100%]'
+            height={100} width={120}
+            className='w-full h-full'
           />
         </div>
-      
       </div>
-      
     </div>
   );
 };

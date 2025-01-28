@@ -73,7 +73,7 @@ const AdminAuth: React.FC = () => {
                 }
                 <section className='flex justify-center items-center w-full h-12'>
                     <input 
-                        id='admin-username' type="text"
+                        type="text"
                         value={userAttmp}
                         onChange={(e)=>setUserAttmp(e.target.value)}
                         placeholder='Username'
@@ -81,7 +81,7 @@ const AdminAuth: React.FC = () => {
                 </section>
                 <section className='flex justify-center items-center w-full h-12'>
                     <input 
-                        id='admin-username' type="text"
+                        type="text"
                         value={passAttmp}
                         onChange={(e)=>setPassAttmp(e.target.value)}
                         placeholder='Password'
