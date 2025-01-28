@@ -62,7 +62,7 @@ const Sales = () => {
                     </article>
                 </section>
 
-                <section className='flex justify-center items-center'>
+                <section className='flex justify-center items-center pb-4'>
                     <figure className='w-[100%] sxs:w-[90%] relative'>
                         <div className='h-[70%] w-full absolute top-0 bg-gradient-to-b from-[#242424] to-transparent'>
                             <h2 className='text-[white] font-tinapa pt-2 pl-2 tracking-wider text-2xl'>PAM&apos;S STEAKY SHRIMP</h2>
