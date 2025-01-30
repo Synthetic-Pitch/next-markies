@@ -5,17 +5,23 @@ import SmallScreen from './components/landingPage/smallScreen/smallScreen'
 import Sales from './components/landingPage/smallScreen/sales'
 import Footer from './components/landingPage/smallScreen/footer'
 
+
 const Page:React.FC = async () => {
-   
-  
-   return (
+    
+    return (
     <div className='relative z-0'>
-      <div>
-        <SmallScreen/>
-        <Slider/>
-        <Sales/>
-        <Footer/>
-      </div>
+        {/* FOR SMALL SCREEN */}
+        <div className=''>
+            <SmallScreen/>
+            <Slider/>
+            <Sales/>
+            <Footer/>
+        </div>
+        {/* {FOR MEDIUM SCREEN} */}
+
+        {/* {FOR LARGE SCREEN} */}
+
+       
     </div>
    )
 }

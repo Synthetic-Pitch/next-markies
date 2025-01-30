@@ -36,4 +36,10 @@ export const customFont6 = localFont(
         variable:"--test",
     }
 )
+export const customFont7 = localFont(
+    {
+        src:'../../../public/fonts/Poppins-Regular.ttf',
+        variable:"--poppins"
+    }
+)
 

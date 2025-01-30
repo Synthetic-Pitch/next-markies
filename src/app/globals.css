@@ -21,12 +21,15 @@
   body{
     margin-top: 64px;
   }
-
+  
   dialog{
     margin:auto;
     padding:20px;
   }
 
 
+  ::backdrop{
+    background: rgb(0, 0, 0,.3);
+  }
 
  

@@ -2,18 +2,23 @@ import { createSlice } from "@reduxjs/toolkit";
 
 type SliderState = {
     slide:boolean;
-    adminPanel:boolean;
-    adminUsername:string;
-    adminPassword:string;
     isAlreadyLogin:boolean;
+    adminPanel:boolean;
+    adminLogin:{
+        username:string;
+        password:string;
+    }
 }
 
 export const initialState:SliderState = {
     slide:false,
     adminPanel:false,
-    adminUsername:'reymark',
-    adminPassword:'dequito',
-    isAlreadyLogin:false
+    isAlreadyLogin:false,
+    adminLogin:{
+        username:'reymark',
+        password:'arielyn'
+    }
+    
 }
 
 const Slider = createSlice({
@@ -26,17 +31,26 @@ const Slider = createSlice({
         setbackward:(state) =>{
             state.slide = false;
         },
-        setAdminPanelShow:(state)=>{
-            state.adminPanel = true;
-        },
-        setAdminPanelClose:(state)=>{
-            state.adminPanel = false;
-        },
         setIsAlreadyLogin:(state)=>{
             state.isAlreadyLogin = true;
+        },
+        setAdminPanelOpen:(state) =>{
+            state.adminPanel = true;
+        },
+        setAdminPanelClose:(state) =>{
+            state.adminPanel = false;
         }
     }
 });
 
-export const {setforward,setbackward,setAdminPanelShow,setAdminPanelClose,setIsAlreadyLogin} = Slider.actions;
+export const {
+    
+    setforward,
+    setbackward,
+    setIsAlreadyLogin,
+    setAdminPanelOpen,
+    setAdminPanelClose
+
+} = Slider.actions;
+
 export default Slider.reducer;

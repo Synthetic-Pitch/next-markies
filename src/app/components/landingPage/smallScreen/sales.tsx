@@ -32,14 +32,15 @@ const Sales = () => {
                     <article 
                         className="w-full h-auto sxs:w-[50%] flex flex-col items-center"
                     >
-                        <h1 className='text-center text-3xl font-test tracking-wider inline-block mx-auto text-[#b98484] p-4 sxs:p-0'>Gnar Steak</h1>
+                        <h1 className='text-center text-3xl font-test tracking-wider inline-block mx-auto text-[#d87b7b] p-4 sxs:p-0'>Gnar Steak</h1>
                         <p className='text-center text-sm px-2'>The native steak of the Gnar tribe, known for its rich flavor and tender texture. Perfect for any occasion, from a casual dinner to a grand feast.</p>
+                        <button className='py-2 text-[white] text-xl underline'>order now</button>
                     </article>
                 </section>
                 
                 
                 <section className="flex flex-col items-center sxs:flex-row justify-center  pb-4">
-                    <figure className="relative w-full h-[15rem] sxs:w-[50%] sxs:h-[300px] flex justify-center items-center">
+                    <figure className="relative w-full h-[15rem] sxs:w-[50%] sxs:h-[300px] flex justify-center items-center overflow-hidden">
                         <Image
                             src={Img2}
                             alt="Sale image showcasing products"
@@ -58,11 +59,11 @@ const Sales = () => {
                     >
                         <h1 className='text-center text-3xl font-test tracking-wider inline-block mx-auto text-[#7cac55] p-4 sxs:p-0'>Fa-si Burito</h1>
                         <p className='text-center text-sm px-2'>The native steak of the Gnar tribe, known for its rich flavor and tender texture. Perfect for any occasion, from a casual dinner to a grand feast.</p>
-                        <button className='py-2 text-[white] text-xl '>order now</button>
+                        <button className='py-2 text-[white] text-xl underline'>order now</button>
                     </article>
                 </section>
-
-                <section className='flex justify-center items-center pb-4'>
+            </main>
+            <footer className='flex justify-center items-center pb-4'>
                     <figure className='w-[100%] sxs:w-[90%] relative'>
                         <div className='h-[70%] w-full absolute top-0 bg-gradient-to-b from-[#242424] to-transparent'>
                             <h2 className='text-[white] font-tinapa pt-2 pl-2 tracking-wider text-2xl'>PAM&apos;S STEAKY SHRIMP</h2>
@@ -72,9 +73,7 @@ const Sales = () => {
                             className='object-contain'
                         />
                     </figure>
-                </section>
-                
-            </main>
+                </footer>
         </div>
     );
 };

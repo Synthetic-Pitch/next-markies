@@ -15,6 +15,7 @@ export default {
         'roboto1':'var(--roboto1)',
         'roboto2':'var(--roboto2)',
         'test':'var(--test)',
+        'poppins':'var(--poppins)'
       },
       colors: {
         background: "var(--background)",
