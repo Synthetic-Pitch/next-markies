@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: 'Email and name are required!' });
         }
         const newData = await FoodsModel.create({ name, email });
-
+        
         // Since POST modifies data, invalidate the cache by setting no-cache headers
         const response = NextResponse.json({ newData }, { status: 201 });
         response.headers.set('Cache-Control', 'no-store');

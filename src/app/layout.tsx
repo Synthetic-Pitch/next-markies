@@ -22,7 +22,7 @@ export default function RootLayout({
       >
         <ReduxProvider>
           <Navbar />
-          {children}
+           {children}
           <ModalContainer/>
         </ReduxProvider>
       </body>
