@@ -24,7 +24,6 @@ const UploadProgress = () => {
     const dispatch =useDispatch();
 
     useEffect(()=>{
-        console.log(Load);
         
         if(isUpload){
             Ref.current?.showModal();
@@ -46,7 +45,7 @@ const UploadProgress = () => {
                     <h2>Uploading</h2>
                     <div className="w-[50vw] bg-gray-200">
                     <div 
-                        className="h-2 bg-gray-600 transition-all duration-500"
+                        className="h-2 bg-gray-600 transition-all duration-100"
                         style={{ width: `${Load}%` }}
                     />
                     </div>
