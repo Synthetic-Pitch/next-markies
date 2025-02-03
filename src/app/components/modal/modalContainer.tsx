@@ -3,6 +3,7 @@
 import React,{useEffect} from 'react';
 import AdminAuth from './modal-components/adminAuth';
 import { useSelector } from 'react-redux';
+import UploadProgress from './modal-components/upload-progress';
 
 
 type State = {
@@ -29,7 +30,7 @@ const ModalContainer = () => {
             document.body.style.position = '';
             document.body.style.width = '';
         }
-        
+
     // Cleanup on unmount
         return () => {
             document.body.style.overflow = '';
@@ -42,6 +43,7 @@ const ModalContainer = () => {
     return (
         <main>
             <AdminAuth/>
+            <UploadProgress/>
         </main>
     );
 };

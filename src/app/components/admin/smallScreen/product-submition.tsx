@@ -1,68 +1,84 @@
-
 'use client'
 import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FileContext } from './form-wrapper';
 import axios from 'axios';
-import {resetProduct} from '@/app/redux/product-create'
-
-
+import { resetProduct,setIsUpload,setIsUploadNot,setLoad } from '@/app/redux/product-create'
 
 type State = {
     product: {
-        product_obj:{
-            name:string;
-            price:string;
-            description:string;
+        product_obj: {
+            name: string;
+            price: string;
+            description: string;
+            Upload:{
+                isUpload:boolean,
+                load:number
+            }
         }
     }
 }
 
 const ProductSubmition = () => {
-    const {fileData,setFileData} = useContext(FileContext);
+    const { fileData, setFileData } = useContext(FileContext);
     const dispatch = useDispatch();
-    const Product = useSelector((state:State)=>state.product.product_obj);
+    const Product = useSelector((state: State) => state.product.product_obj);
+
 
     const HandleSubmition = async () => {
-
         const formData = new FormData();
+        const Condition = Product.name.length > 0 && Product.price.length > 0 && Product.description.length > 0;
 
-
-        const Condition = Product.name.length > 0 && Product.price.length > 0 && Product.description.length > 0
-
-        if(Condition){
-            if(fileData === null){
-                return console.log("Please add image!");
+        if (Condition) {
+            if (fileData === null) {
+                console.log("Please add image!");
+                return;
             }
 
-            formData.append("name",Product.name);
-            formData.append("price",Product.price);
-            formData.append("description",Product.description);
-            formData.append("image",fileData);
-            
-            
-            try{
-                await axios.post("/api/post",formData)
-                console.log("posted succes!");
-                dispatch(resetProduct());
-                setFileData(null)
-            }
-            catch(err){
-                console.error(err)
+            dispatch(setIsUpload());
+            dispatch(setLoad(0));
+
+            formData.append("name", Product.name);
+            formData.append("price", Product.price);
+            formData.append("description", Product.description);
+            formData.append("image", fileData);
+
+            try {
+                await axios.post("/api/post", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    onUploadProgress: (progressEvent) => {
+                        if (progressEvent.total) {
+                            const percentCompleted = Math.round(
+                                (progressEvent.loaded * 100) / progressEvent.total
+                            );
+                            dispatch(setLoad(percentCompleted));
+                        }
+                    }
+                });
                 
+                console.log("Posted successfully!");
+                dispatch(resetProduct());
+                setFileData(null);
+            } catch (err) {
+                console.error("Upload error:", err);
+            } finally {
+                dispatch(setIsUploadNot())
+                dispatch(setLoad(0))
             }
-
-        }else{
-            console.log("Please provide name,price and description to the product!");
-            
-        }        
+        } else {
+            console.log("Please provide name, price and description to the product!");
+        }
     }
 
     return (
-        <div className='flex justify-center items-center mt-3'>
-            <button 
+        <div className='flex flex-col justify-center items-center gap-4 mt-3'>
+            <button
                 onClick={HandleSubmition}
-                className='bg-[#bebebe] w-[50vw] py-3 rounded-full font-poppins text-poppins font-bold tracking-[5px] shadow-xl text-[4vw]'>SUBMIT</button>
+                className='bg-[#bebebe] w-[50vw] py-3 rounded-full font-poppins text-poppins font-bold tracking-[5px] shadow-xl text-[4vw]'>SUBMIT
+            </button>
+
         </div>
     );
 };

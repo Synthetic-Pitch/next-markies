@@ -12,6 +12,10 @@ export const initialState = {
             name:'',
             size:'',
             type:''
+        },
+        Upload:{
+            load:0,
+            isUpload:false
         }
     }
 };
@@ -45,6 +49,15 @@ const ProductSlice = createSlice({
         setContentType : (state,action) => {
             state.product_obj.imgContent.type = action.payload
         },
+        setIsUpload : (state) => {
+            state.product_obj.Upload.isUpload = true;
+        },
+        setIsUploadNot : (state) => {
+            state.product_obj.Upload.isUpload = false;
+        },
+        setLoad : (state,action) => {
+            state.product_obj.Upload.load = action.payload
+        },
         
         resetImg : (state) => {
             state.product_obj.imgContent = initialState.product_obj.imgContent;
@@ -64,7 +77,8 @@ export const {
     setDescription,setPrevURL,
     resetProduct,setContentName,
     setContentSize,setContentType,
-    resetImg
+    resetImg,setIsUpload,setIsUploadNot,
+    setLoad,
 
 
 } = ProductSlice.actions;
