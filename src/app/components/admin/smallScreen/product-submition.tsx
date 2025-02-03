@@ -1,9 +1,12 @@
 
 'use client'
-import React, { useContext, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FileContext } from './form-wrapper';
 import axios from 'axios';
+import {resetProduct} from '@/app/redux/product-create'
+
+
 
 type State = {
     product: {
@@ -16,35 +19,33 @@ type State = {
 }
 
 const ProductSubmition = () => {
-    const {fileData} = useContext(FileContext)
-
+    const {fileData,setFileData} = useContext(FileContext);
+    const dispatch = useDispatch();
     const Product = useSelector((state:State)=>state.product.product_obj);
 
-    useEffect(()=>{
-        console.log(fileData);
-        
-    },[fileData])
-
-
     const HandleSubmition = async () => {
-        
-        const PendingData = {
-            name: Product.name,
-            price:Product.price,
-            description:Product.description,
-            srcImg:fileData
-        }
-        const Condition = PendingData.name.length > 0 && PendingData.price.length > 0 && PendingData.description.length > 0
+
+        const formData = new FormData();
+
+
+        const Condition = Product.name.length > 0 && Product.price.length > 0 && Product.description.length > 0
 
         if(Condition){
             if(fileData === null){
                 return console.log("Please add image!");
-                
             }
 
+            formData.append("name",Product.name);
+            formData.append("price",Product.price);
+            formData.append("description",Product.description);
+            formData.append("image",fileData);
+            
+            
             try{
-                await axios.post("/api/post",PendingData)
+                await axios.post("/api/post",formData)
                 console.log("posted succes!");
+                dispatch(resetProduct());
+                setFileData(null)
             }
             catch(err){
                 console.error(err)

@@ -29,7 +29,7 @@ const ModalContainer = () => {
             document.body.style.position = '';
             document.body.style.width = '';
         }
-
+        
     // Cleanup on unmount
         return () => {
             document.body.style.overflow = '';

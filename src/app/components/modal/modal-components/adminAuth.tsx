@@ -16,7 +16,7 @@ type State = {
         }
     }
 }
-type Login= {
+type Login = {
     username:string;
     password:string;
 }

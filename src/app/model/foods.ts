@@ -11,7 +11,7 @@ const foodSchema :Schema = new Schema({
     name: {type: String, required :true},
     price:{type: Number, required :true},
     url:{type: String, required:true},
-    description:{type: String, required:false},
+    description:{type: String, required:true},
 },{timestamps:true});
 
 const FoodsModel: Model<IFoods> = 

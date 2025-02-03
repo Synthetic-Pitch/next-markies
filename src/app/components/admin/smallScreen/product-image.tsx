@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {setPrevURL, setContentSize,setContentType,setContentName,resetImg} from '@/app/redux/product-create'
 import { FileContext } from './form-wrapper';
 
+
 type State = {
     product: {
         product_obj: {
@@ -21,8 +22,6 @@ type State = {
         }
     }
 }
-
-
 
 const ProductImage = () => {
 
@@ -46,14 +45,13 @@ const ProductImage = () => {
             const Url = URL.createObjectURL(selectedFile);
             dispatch(setPrevURL(Url));
 
-            const formData = new FormData();
-            formData.append("file",selectedFile);
-            setFileData(formData)
+            setFileData(selectedFile);
             // setting Image Contents
             dispatch(setContentName(selectedFile.name))
             dispatch(setContentSize(formatFileSize(selectedFile.size)))
             dispatch(setContentType(selectedFile.type))
-
+        }else{
+            console.log("selected file is invalid"); 
         }
     }
 
@@ -79,7 +77,7 @@ const ProductImage = () => {
                    
                     <div className='w-full h-full flex items-center justify-center'>
                         <label 
-                            className='w-[80%] h-[80%] border-2 border-dotted flex justify-center items-center font-poppins text-sm'
+                            className='w-[80%] h-[80%] border-2 border-dotted flex justify-center items-center font-poppins text-sm text-center'
                             htmlFor="image-file"
                         >upload image</label>
                         <input 
