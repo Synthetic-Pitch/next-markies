@@ -23,12 +23,12 @@ export async function POST(req: NextRequest) {
         const price = formData.get("price") as string;
         const description = formData.get("description") as string;
         const imageFile = formData.get("image") as File; // Get the image file
-
+        const category = formData.get("category") as string;
         
-        if(!imageFile || !name || !price || !description){
+        if(!imageFile || !name || !price || !description || !category){
             return NextResponse.json({message:"all requirements are required"},{status:400})
         }
-
+        
         
         // Convert image file to a Base64 Blob URL
         const arrayBuffer = await imageFile.arrayBuffer();

@@ -13,7 +13,7 @@ type SliderState = {
 export const initialState:SliderState = {
     slide:false,
     adminPanel:false,
-    isAlreadyLogin:false,
+    isAlreadyLogin:true,
     adminLogin:{
         username:'reymark',
         password:'arielyn'

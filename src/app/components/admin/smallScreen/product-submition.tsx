@@ -1,9 +1,9 @@
 'use client'
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FileContext } from './form-wrapper';
 import axios from 'axios';
-import { resetProduct,setIsUpload,setIsUploadNot,setLoad } from '@/app/redux/product-create'
+import { resetProduct, setIsUpload, setIsUploadNot, setLoad, setSucces } from '@/app/redux/product-create';
 
 type State = {
     product: {
@@ -13,8 +13,9 @@ type State = {
             description: string;
             Upload:{
                 isUpload:boolean,
-                load:number
-            }
+                load:number,
+            },
+            category:string;
         }
     }
 }
@@ -23,8 +24,7 @@ const ProductSubmition = () => {
     const { fileData, setFileData } = useContext(FileContext);
     const dispatch = useDispatch();
     const Product = useSelector((state: State) => state.product.product_obj);
-
-
+    
     const HandleSubmition = async () => {
         const formData = new FormData();
         const Condition = Product.name.length > 0 && Product.price.length > 0 && Product.description.length > 0;
@@ -34,13 +34,16 @@ const ProductSubmition = () => {
                 console.log("Please add image!");
                 return;
             }
-
+            if(Product.category.length === 0){
+                return console.log("Please add category!");
+            }
             dispatch(setIsUpload());
             dispatch(setLoad(0));
-
+            
             formData.append("name", Product.name);
             formData.append("price", Product.price);
             formData.append("description", Product.description);
+            formData.append("category",Product.category);
             formData.append("image", fileData);
 
             try {
@@ -57,14 +60,15 @@ const ProductSubmition = () => {
                         }
                     }
                 });
-                
-                console.log("Posted successfully!");
-                dispatch(resetProduct());
-                setFileData(null);
+
             } catch (err) {
                 console.error("Upload error:", err);
             } finally {
-                dispatch(setIsUploadNot())
+                console.log("Posted successfully!");
+                dispatch(resetProduct());
+                setFileData(null);
+                dispatch(setSucces());
+                dispatch(setIsUploadNot());
                 dispatch(setLoad(0))
             }
         } else {
