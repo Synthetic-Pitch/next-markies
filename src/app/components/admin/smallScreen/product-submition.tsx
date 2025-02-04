@@ -75,9 +75,9 @@ const ProductSubmition = () => {
             console.log("Please provide name, price and description to the product!");
         }
     }
-
+    
     return (
-        <div className='flex flex-col justify-center items-center gap-4 mt-3'>
+        <div className='flex flex-col justify-center items-center gap-4 mt-3 pb-4'>
             <button
                 onClick={HandleSubmition}
                 className='bg-[#bebebe] w-[50vw] py-3 rounded-full font-poppins text-poppins font-bold tracking-[5px] shadow-xl text-[4vw]'>SUBMIT
