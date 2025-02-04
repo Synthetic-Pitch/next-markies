@@ -32,8 +32,8 @@ export async function GET() {
         const beverages = await FoodsModel.find({category: "beverage"}).limit(50);
         
         // Update cache with new data and count
-        await redis.set(cachedKey, JSON.stringify(beverages), 'EX', 3600);
-        await redis.set(`${cachedKey}_count`, currentCount, 'EX', 3600);
+        await redis.set(cachedKey, JSON.stringify(beverages), { EX: 3600 });
+        await redis.set(`${cachedKey}_count`, currentCount, { EX: 3600 });
 
         return NextResponse.json({
             message: 'Data fetched from database and cached',
