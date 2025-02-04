@@ -34,8 +34,8 @@ const UploadProgress = () => {
             Ref.current?.close();
             dispatch(setModalClose());
         }
-    },[isUpload,Load])
-
+    },[isUpload,Load,dispatch])
+    
     
     return (
         <dialog

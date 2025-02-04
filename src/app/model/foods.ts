@@ -9,11 +9,15 @@ export interface IFoods extends Document{
 
 const foodSchema :Schema = new Schema({
     name: {type: String, required :true},
-    price:{type: Number, required :true},
+    price:{type: String, required :true},
     url:{type: String, required:true},
     description:{type: String, required:true},
+    category:{type: String,enum:["mainDish","desert","beverage"], required:true}
 },{timestamps:true});
 
+foodSchema.index({ category:1 });
+
+// create collection model
 const FoodsModel: Model<IFoods> = 
     mongoose.models.foods || mongoose.model<IFoods>("foods",foodSchema)
 
