@@ -1,37 +1,41 @@
-import { NextRequest, NextResponse } from 'next/server';
-import MongoDbConnect from '../../../lib/mongoDb';
-import FoodsModel from '../model/userModel';
+import { NextRequest, NextResponse } from "next/server";
+import TestModel from '@/app/model/test'
+import MongoDbConnect from "../../../lib/mongoDb";
+import Redis from "ioredis";
 
-export async function GET() {
-    await MongoDbConnect();
-    try {
-        const foods = await FoodsModel.find({}).sort({ createdAt: -1 }).limit(50);
-        const response = NextResponse.json({ success: true, data: foods });
+const redis = new Redis({
+    host:'localhost',
+    port: 6379
+});
+const CACHE_KEY = 'test-data';
+export const config = { runtime: "edge" }; // Enables Edge Function
 
-        // Add Cache-Control header for GET requests, This makes server more faster!
-        response.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
-        return response;
+export async function GET(){
+    await MongoDbConnect()
+    try{
+      const cachedData = await redis.get(CACHE_KEY);
+      if (cachedData) {
+        return NextResponse.json(JSON.parse(cachedData));
+      }
+      
+      const data = await TestModel.find({});
+      await redis.set(CACHE_KEY, JSON.stringify(data));
+      return NextResponse.json(data);
     } catch (err) {
-        console.log(err);
-        return NextResponse.json({ message: "error with server" }, { status: 500 });
+      return NextResponse.json({ error: 'Failed to fetch data',err });
     }
-};
+  }
 
-export async function POST(req: NextRequest) {
-    await MongoDbConnect();
-    try {
-        const { name, email } = await req.json();
-        if (!name || !email) {
-            return NextResponse.json({ message: 'Email and name are required!' });
-        }
-        const newData = await FoodsModel.create({ name, email });
-        
-        // Since POST modifies data, invalidate the cache by setting no-cache headers
-        const response = NextResponse.json({ newData }, { status: 201 });
-        response.headers.set('Cache-Control', 'no-store');
-        return response;
-    } catch (err) {
-        console.error('uploading to database error in server', err);
-        return NextResponse.json({ message: 'Error', err }, { status: 500 });
+
+export async function POST(req:NextRequest){
+    await MongoDbConnect()
+    try{
+        const {name,age} = await req.json();
+        const newData = await TestModel.create({name,age});
+        return NextResponse.json({newData},{status:201});
     }
-};
+    catch(err){
+        console.error(err);
+        return NextResponse.json({message:"err on server"},{status:500})
+    }
+}

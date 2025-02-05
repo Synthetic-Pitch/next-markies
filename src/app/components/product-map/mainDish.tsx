@@ -8,7 +8,7 @@ type Data = {
     name: string;
     price:string;
     description:string;
-    url:string
+    url:string;
     
 }
 const MainDish = () => {

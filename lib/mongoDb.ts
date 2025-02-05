@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const URI = process.env.MONGODB_URI as string;
 
-// Instead of boolean flag, we cache the mongoose instance
+// Instead of boolean flag, we cache the mongoose instance || POOLING
 let cachedConnection: typeof mongoose | null = null;
 
 const MongoDbConnect = async () => {
@@ -36,7 +36,7 @@ const MongoDbConnect = async () => {
       console.error("MongoDB connection error:", err);
       cachedConnection = null;
     });
-
+    
     mongoose.connection.on("disconnected", () => {
       console.warn("MongoDB disconnected");
       cachedConnection = null;
