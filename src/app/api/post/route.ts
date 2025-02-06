@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import cloudinary from "../../../../lib/cloudinary";
 import MongoDbConnect from '../../../../lib/mongoDb';
 import FoodsModel from "@/app/model/foods";
+import { revalidatePath } from "next/cache";
 // import redis from '../../../../lib/redis';  // Redis connection
 
 // const RATE_LIMIT = 5;  // Max number of requests per minute (you can adjust this number)
@@ -63,18 +64,10 @@ export async function POST(req: NextRequest) {
             category: category
         });
 
-        let path = "";
-        if(category === "mainDish"){
-            path = "/mainDish";
-        }else if(category === "beverage"){
-            path = "/beverage";
-        }
-
-        await fetch('https://next-markies.vercel.app/api/revalidate/mainDish',{
-            method:"POST",
-            headers :{ "Content-Type": "application/json" },
-            body: JSON.stringify({ path: path}),
-        })
+        
+        const Path = category === "mainDish" ? "/mainDish" : "/beverage"
+        
+        revalidatePath(Path);
 
         // // 3️⃣ Increment the request count in Redis
         // await redis.incr(`rate_limit:${ip}`);
