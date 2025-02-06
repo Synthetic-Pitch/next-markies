@@ -7,8 +7,9 @@ type Data = {
     url:string;
 }
 export default async function MainDish() {
-    const response = await fetch('https://next-markies.vercel.app/api/get/mainDish')
-    const data = await response.json()
+    const vercelURL = 'https://next-markies.vercel.app/api/get/mainDish'
+    const response = await fetch(vercelURL)
+    const data = await response.json();
     
     return (
         <div className="grid grid-cols-1 sxs:grid-cols-2 xs:grid-cols-3">
