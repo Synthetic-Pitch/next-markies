@@ -7,7 +7,7 @@ type Data = {
     url:string;
 }
 export default async function MainDish() {
-    const response = await fetch('http://localhost:3000/api/get/mainDish')
+    const response = await fetch('/api/get/mainDish')
     const data = await response.json()
     
     return (
