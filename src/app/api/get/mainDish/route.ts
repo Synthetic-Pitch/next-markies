@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import MongoDbConnect from '../../../../../lib/mongoDb';
 import FoodsModel from "@/app/model/foods";
-// import redis from "../../../../../lib/redis";
+
 
 export async function GET() {
     await MongoDbConnect();

@@ -7,7 +7,7 @@ const CACHE_KEY = 'beverages';
 
 export async function GET() {
     await MongoDbConnect();
-
+    
     try {
         // Step 1: Try getting data from Redis cache
         const cachedData = await redis.get(CACHE_KEY);
