@@ -8,7 +8,7 @@ type Data = {
 }
 export default async function MainDish() {
     const vercelURL = 'https://next-markies.vercel.app/api/get/mainDish';
-    const response = await fetch(vercelURL,{next: { revalidate: 30 }});
+    const response = await fetch(vercelURL,{next: { revalidate: 20 }}); //validate every 20 seconds
     const data = await response.json();
     
     return (
