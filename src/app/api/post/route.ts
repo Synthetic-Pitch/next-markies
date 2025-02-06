@@ -65,8 +65,8 @@ export async function POST(req: NextRequest) {
         });
 
         
-        const Path = category === "mainDish" ? "/mainDish" : "/beverage"
-        
+        const Path = category === "mainDish" ? "/main-dish" : "/beverage"
+
         revalidatePath(Path);
 
         // // 3️⃣ Increment the request count in Redis
