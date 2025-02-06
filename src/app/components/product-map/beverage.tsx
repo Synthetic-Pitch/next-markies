@@ -7,7 +7,7 @@ type Data = {
     url:string;
 }
 export default async function Beverage() {
-    const response = await fetch('https://next-markies.vercel.app/api/get/beverage',{cache:'no-store',next: { revalidate: 20 }}); //validate every 20 seconds
+    const response = await fetch('https://next-markies.vercel.app/api/get/beverage',{next: { revalidate: false }}); 
     const data = await response.json();
     
     return (

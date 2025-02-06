@@ -63,7 +63,18 @@ export async function POST(req: NextRequest) {
             category: category
         });
 
-        await fetch('')
+        let path = "";
+        if(category === "mainDish"){
+            path = "/mainDish";
+        }else if(category === "beverage"){
+            path = "/beverage";
+        }
+
+        await fetch('https://next-markies.vercel.app/api/revalidate/mainDish',{
+            method:"POST",
+            headers :{ "Content-Type": "application/json" },
+            body: JSON.stringify({ path: path}),
+        })
 
         // // 3️⃣ Increment the request count in Redis
         // await redis.incr(`rate_limit:${ip}`);
