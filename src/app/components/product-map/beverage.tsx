@@ -7,8 +7,8 @@ type Data = {
     url:string;
 }
 export default async function Beverage() {
-    const response = await fetch('https://next-markies.vercel.app/api/get/beverage',{cache:'no-store'})
-    const data = await response.json()
+    const response = await fetch('https://next-markies.vercel.app/api/get/beverage',{cache:'no-store',next: { revalidate: 60 }}); // Revalidate every 60 seconds
+    const data = await response.json()  
     
     return (
         <div className="grid grid-cols-1 sxs:grid-cols-2 xs:grid-cols-3">
