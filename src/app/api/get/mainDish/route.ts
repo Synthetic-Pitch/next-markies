@@ -9,10 +9,8 @@ export async function GET() {
     try {
         const beverages = await FoodsModel.find({category: "mainDish"}).limit(20);
         const response = NextResponse.json(beverages, { status: 200 });
-        response.headers.set('Cache-Control', 'no-store'); // No caching
-        
+
         return response;
-        
     }
     
     catch(err){
