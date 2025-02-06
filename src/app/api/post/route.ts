@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
             // Pipe the file buffer to the upload stream
             uploadStream.end(buffer);
         });
-        
+
         // Uploading the Cloudinary URL and product content to MongoDB
         const Model = await FoodsModel.create({
             name: name,
@@ -62,6 +62,8 @@ export async function POST(req: NextRequest) {
             url: (sendToClaudinary as { secure_url: string }).secure_url, // The URL from Cloudinary
             category: category
         });
+
+        await fetch('')
 
         // // 3️⃣ Increment the request count in Redis
         // await redis.incr(`rate_limit:${ip}`);
