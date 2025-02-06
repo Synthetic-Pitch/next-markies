@@ -63,7 +63,6 @@ export async function POST(req: NextRequest) {
             url: (sendToClaudinary as { secure_url: string }).secure_url, // The URL from Cloudinary
             category: category
         });
-
         
         const Path = category === "mainDish" ? "/main-dish" : "/beverage"
 
