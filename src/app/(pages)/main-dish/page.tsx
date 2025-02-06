@@ -1,4 +1,4 @@
-import MainDish from '@/app/components/product-map/mainDish'
+// import MainDish from '@/app/components/product-map/mainDish'
 import React from 'react'
 
 const page = () => {
