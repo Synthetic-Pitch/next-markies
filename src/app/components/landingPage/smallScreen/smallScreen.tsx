@@ -56,7 +56,7 @@ const SmallScreen = () => {
         </aside>
         <article className='flex justify-center items-center w-[50%]'>
           <h1
-            onClick={() => route.push('/beverages')} 
+            onClick={() => route.push('/beverage')} 
             className='text-[min(10vw,8vw)]  font-semibold cursor-pointer px-5 border-2 border-[#5c5c5c] rounded-full font-pandesal text-[#5c5c5c] select-none'>
             Beverages
           </h1>

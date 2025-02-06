@@ -90,16 +90,16 @@ const ProductImage = () => {
                    )}
                 </aside>
                 <article className='relative w-[50%] flex flex-col justify-center gap-2'>
-                    <button 
+                    <button
                         onClick={Reset}
                         className='absolute top-0 right-0 mr-2 font-bold'>X</button>
-                    <h1 
+                    <h1
                         className='w-full break-words font-roboto2 text-[15px]'
                     >name: {Product.imgContent.name}</h1>
-                    <h1 
+                    <h1
                         className='w-full break-words font-roboto2 text-[15px]'
                     >size: {Product.imgContent.size}</h1>
-                    <h1 
+                    <h1
                         className='w-full break-words font-roboto2 text-[15px]'
                     >type: {Product.imgContent.type}</h1>
                 </article>
