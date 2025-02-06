@@ -6,10 +6,9 @@ type Data = {
     description:string
     url:string;
 }
-export const dynamic = 'force-dynamic'
 export default async function MainDish() {
     const vercelURL = 'https://next-markies.vercel.app/api/get/mainDish'
-    const response = await fetch(vercelURL)
+    const response = await fetch(vercelURL,{cache:'no-store'})
     const data = await response.json();
     
     return (
