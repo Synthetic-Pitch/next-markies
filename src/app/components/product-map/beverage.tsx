@@ -7,7 +7,7 @@ type Data = {
     url:string;
 }
 export default async function Beverage() {
-    const response = await fetch('http://localhost:3000/api/get/beverage')
+    const response = await fetch('https://next-markies.vercel.app/api/get/beverage')
     const data = await response.json()
     
     return (

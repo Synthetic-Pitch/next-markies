@@ -7,7 +7,7 @@ type Data = {
     url:string;
 }
 export default async function MainDish() {
-    const response = await fetch('/api/get/mainDish')
+    const response = await fetch('https://next-markies.vercel.app/api/get/mainDish')
     const data = await response.json()
     
     return (
