@@ -8,10 +8,10 @@ type Data = {
 }
 export default async function Desert () {
     
-    const data = await fetch('http://localhost:3000/api/get/mainDish')
+    const data = await fetch('https://next-markies.vercel.app/api/get/mainDish')
     const parse = await data.json();
     console.log(parse);
-    
+
     return (
         <div className="grid grid-cols-2">
             {parse.map((product:Data,index:number) => (
