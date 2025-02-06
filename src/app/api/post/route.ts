@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
             // Pipe the file buffer to the upload stream
             uploadStream.end(buffer);
         });
-
+        
         // Uploading the Cloudinary URL and product content to MongoDB
         const Model = await FoodsModel.create({
             name: name,
