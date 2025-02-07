@@ -65,14 +65,16 @@ export async function POST(req: NextRequest) {
         });
         
         
-
+        
         // // 3️⃣ Increment the request count in Redis
         // await redis.incr(`rate_limit:${ip}`);
         
         // // 4️⃣ Set the expiry time for the rate limit key (1 minute)
         // await redis.expire(`rate_limit:${ip}`, RATE_LIMIT_WINDOW);
 
-        return NextResponse.json({ Model }, { status: 201 });
+        return NextResponse.json({ Model }, { status: 201,headers:{
+            "Cache-Control": "no-store",
+        }});
 
     } catch (err) {
         console.error("Error:", err);
