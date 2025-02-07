@@ -31,6 +31,7 @@ const MainDishProductLayout: React.FC<Data> = ({name,price,url,description}) => 
                     <h2 className='font-poppins text-[#504f4f]'>{name}</h2>
                     <IoMdAddCircle />
                 </div>
+                <div className='hidden'>{description}</div>
             </div>
         </div>
     );
