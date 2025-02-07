@@ -3,6 +3,7 @@ import cloudinary from "../../../../lib/cloudinary";
 import MongoDbConnect from '../../../../lib/mongoDb';
 import FoodsModel from "@/app/model/foods";
 import { revalidateTag } from "next/cache";
+
 // import redis from '../../../../lib/redis';  // Redis connection
 
 // const RATE_LIMIT = 5;  // Max number of requests per minute (you can adjust this number)
@@ -64,7 +65,10 @@ export async function POST(req: NextRequest) {
             category: category
         });
         
-        
+        const tag =  req.nextUrl.searchParams.get('mainDish');
+        if (tag) {
+            revalidateTag(tag);
+        }
         
         // // 3️⃣ Increment the request count in Redis
         // await redis.incr(`rate_limit:${ip}`);
@@ -72,7 +76,7 @@ export async function POST(req: NextRequest) {
         // // 4️⃣ Set the expiry time for the rate limit key (1 minute)
         // await redis.expire(`rate_limit:${ip}`, RATE_LIMIT_WINDOW);
 
-        return NextResponse.json({ Model }, { status: 201,headers:{
+        return NextResponse.json({ Model,revalidate:true,noe:Date.now() }, { status: 201,headers:{
             "Cache-Control": "no-store",
         }});
 
@@ -80,7 +84,5 @@ export async function POST(req: NextRequest) {
         console.error("Error:", err);
         return NextResponse.json({ message: "Error processing data" }, { status: 500 });
     }
-    finally{
-        revalidateTag('mainDish')
-    }
+    
 }
