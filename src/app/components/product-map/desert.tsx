@@ -6,9 +6,12 @@ type Data = {
     description:string;
     url:string
 }
+
 export default async function Desert () {
-    
-    const data = await fetch('https://next-markies.vercel.app/api/get/mainDish')
+    // vercel: https://next-markies.vercel.app/api/get/mainDish
+    // local : http://localhost:3000/api/get/mainDish
+    const data = await fetch('https://next-markies.vercel.app/api/get/mainDish',
+     {next:{tags: ['mainDish'], revalidate: false}});
     const parse = await data.json();
     console.log(parse);
     

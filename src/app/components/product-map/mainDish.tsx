@@ -9,7 +9,7 @@ type Data = {
 export default async function MainDish() {
     // vercel: https://next-markies.vercel.app/api/get/mainDish
     // local : http://localhost:3000/api/get/mainDish
-
+    
     const vercelURL = 'https://next-markies.vercel.app/api/get/mainDish';
     const response = await fetch(vercelURL,{next:{revalidate:false}}); 
     const data = await response.json();
