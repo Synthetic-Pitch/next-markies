@@ -10,7 +10,7 @@ type Data = {
 export default async function Desert () {
     // vercel: https://next-markies.vercel.app/api/get/mainDish
     // local : http://localhost:3000/api/get/mainDish
-    const data = await fetch('http://localhost:3000/api/get/mainDish',
+    const data = await fetch('https://next-markies.vercel.app/api/get/mainDish',
      {next:{tags: ['mainDish']}});
     const parse = await data.json();
     console.log(parse);
