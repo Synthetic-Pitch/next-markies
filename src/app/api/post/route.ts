@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import cloudinary from "../../../../lib/cloudinary";
 import MongoDbConnect from '../../../../lib/mongoDb';
 import FoodsModel from "@/app/model/foods";
-import { revalidateTag } from "next/cache";
+
 
 export async function POST(req: NextRequest) {
    
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
             // Pipe the file buffer to the upload stream
             uploadStream.end(buffer);
         });
-        
+
         // Uploading the Cloudinary URL and product content to MongoDB
         const Model = await FoodsModel.create({
             name: name,
@@ -49,10 +49,7 @@ export async function POST(req: NextRequest) {
             category: category
         });
         
-        const tag =  req.nextUrl.searchParams.get('mainDish');
-        if (tag) {
-            revalidateTag(tag);
-        }
+ 
         
         return NextResponse.json({ Model,revalidate:true,noe:Date.now() }, { status: 201,headers:{
             "Cache-Control": "no-store",
