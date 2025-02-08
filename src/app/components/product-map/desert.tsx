@@ -11,7 +11,7 @@ import MainDishProductLayout from "../product-layout/smallScreen/mainDish-produc
   }
 
   async function GetProducts() {
-    const response = await fetch('http://localhost:3000/api/get/mainDish')
+    const response = await fetch('https://next-markies.vercel.app/api/get/mainDish')
     const data = await response.json()
     console.log(data);
     

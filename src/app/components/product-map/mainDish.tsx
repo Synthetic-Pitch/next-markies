@@ -12,7 +12,7 @@ export default async function MainDish() {
     // local : http://localhost:3000/api/get/mainDish
     
     cookies();
-    const vercelURL = 'http://localhost:3000/api/get/mainDish';
+    const vercelURL = 'https://next-markies.vercel.app/api/get/mainDish';
     const response = await fetch(vercelURL);
     const data = await response.json();
     
