@@ -9,7 +9,7 @@ import MainDishProductLayout from "../product-layout/smallScreen/mainDish-produc
     description:string
     url:string
   }
-
+  
   async function GetProducts() {
     const response = await fetch('https://next-markies.vercel.app/api/get/mainDish')
     const data = await response.json()

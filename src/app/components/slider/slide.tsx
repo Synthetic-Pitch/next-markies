@@ -67,8 +67,8 @@ const Slide:React.FC = () => {
 
           <Link 
             onClick={handleDispatch} 
-            className='py-4 px-8' href={"/cart"}
-          >Cart</Link>
+            className='py-4 px-8' href={"/order"}
+          >Order</Link>
 
           <div
             onClick={handleAdmin}
