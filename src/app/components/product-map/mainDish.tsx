@@ -1,5 +1,4 @@
 
-
 import { cookies } from "next/headers";
 import Sort from "./Sort";
 
@@ -23,13 +22,10 @@ async function GetProducts() {
 export default async function MainDish() {
     cookies();
     const data = await GetProducts();
-    
+
     return (
       <div className="bg-[#ffffff]">
-        <h2>filter</h2>
-        <Sort fetchData={data}>
-          
-        </Sort>
+        <Sort fetchData={data}/>
       </div>
     )
 }
