@@ -46,6 +46,7 @@ const MainDishProductLayout:React.FC<Prop> = ({products}) => {
                                  {item.name}
                                 </div>
                             </footer>
+                            <div className='hidden'>{item.description}</div>
                         </div>
                         
                     </Link>
