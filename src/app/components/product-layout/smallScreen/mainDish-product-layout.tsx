@@ -14,10 +14,11 @@ type Data = {
 type Prop ={
     products :Data[]
 }
+
 const MainDishProductLayout:React.FC<Prop> = ({products}) => {
     
     return (
-        <main className='grid grid-cols-1 sxs:grid-cols-2 xs:grid-cols-3 px-1 z-10 mb-2'>
+        <main className='grid grid-cols-1 sxs:grid-cols-2 xs:grid-cols-3 px-1 mb-2'>
             {
                 products.map((item:Data,index:number)=>(
                    
@@ -30,7 +31,7 @@ const MainDishProductLayout:React.FC<Prop> = ({products}) => {
                             className='w-[97%] h-[97%] bg-[#cecece] rounded-tr-[20px] relative rounded-bl-[20px]'
                         >
                             <header 
-                                className='bg-[#d1e2df] rounded-l-full max-w-min px-2 -rotate-[20deg] z-10 relative font-poppins'>&#x20B1;&nbsp;{item.price}
+                                className='bg-[#d1e2df] rounded-l-full max-w-min px-2 -rotate-[20deg] relative font-poppins z-20'>&#x20B1;&nbsp;{item.price}
                             </header>
                             <main
                                 className='w-full h-[80%] bg-[gray] absolute top-0 rounded-tr-[20px] overflow-hidden flex justify-center'

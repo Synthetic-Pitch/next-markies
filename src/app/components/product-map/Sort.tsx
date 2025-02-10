@@ -55,13 +55,13 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
         <div className="flex flex-col">
             <div className="flex">
                 <h2 
-                    className="tracking-wider font-roboto2 pl-2" onClick={()=>setBtn(!btn)}
+                    className="tracking-wider font-roboto2 pl-2 relative " onClick={()=>setBtn(!btn)}
                 >filter</h2>
                 {
                     btn && 
                     <div 
-                        className="w-[20px] relative ml-2">
-                            <div className="bg-[#d4d4d4] absolute top-0">
+                        className="w-[20px] relative ml-2 z-30">
+                            <div className="bg-[#d4d4d4] absolute top-0 ">
                                 <ul 
                                     className="h-full w-full p-2 flex flex-col ">
                                     <li 

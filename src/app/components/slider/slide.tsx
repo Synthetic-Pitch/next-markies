@@ -41,9 +41,9 @@ const Slide:React.FC = () => {
   
     return (
       <div 
-        className={`absolute top-[100%] z-30 bg-gradient-to-b from-[#a8a8a8] to-[#3d3d3d] w-[50vw] h-[100dvh] transition-[left] duration-500 ease-in-out ${Slide ? '-left-[0%]': '-left-[100%]'} `}
+        className={`absolute top-[100%] z-50 bg-gradient-to-b from-[#a8a8a8] to-[#3d3d3d] w-[50vw] h-[100dvh] transition-[left] duration-500 ease-in-out ${Slide ? '-left-[0%]': '-left-[100%]'} `}
       >
-        <ul className='flex flex-col items-center pt-4 font-poppins select-none z-20'>
+        <ul className='flex flex-col items-center pt-4 font-poppins select-none z-50'>
           
           <Link 
             onClick={handleDispatch}

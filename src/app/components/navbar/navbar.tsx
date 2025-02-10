@@ -10,7 +10,7 @@ const Navbar = () => {
    
    return (
    
-         <div className='fixed top-0 h-16 w-[100vw] bg-[#fff1cc] z-20'>
+         <div className='fixed top-0 h-16 w-[100vw] bg-[#fff1cc] z-50'>
             
             {/* small screen */}
             <nav 
