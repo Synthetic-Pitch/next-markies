@@ -49,7 +49,6 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
                 item.name.toLowerCase().includes(filter.search.toLowerCase()) // Case-insensitive match
             );
         }
-        console.log(data);
         
         setData(updatedData);
         

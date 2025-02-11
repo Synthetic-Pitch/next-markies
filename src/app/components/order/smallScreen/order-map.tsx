@@ -22,19 +22,17 @@ type State = {
 
 const OrderMap = () => {
     const order = useSelector((state:State) => state.order.order_Obj);
-    console.log(order);
     const dispatch = useDispatch();
 
     const Increment = (id:string) => {
         dispatch(incrementQuantity(id));
     }
     const Decrement = (id:string) => {
-        
         dispatch(decrementQuantity(id));
     }
     
     return (
-        <main className='pt-2 w-full flex flex-col items-center justify-center gap-2'>
+        <main className='w-full  flex flex-col items-center justify-center gap-2 '>
             {
                 order.length > 0 && 
                 order.map((item,index)=>(
@@ -51,7 +49,7 @@ const OrderMap = () => {
                                 />
                             </div>
                         </figure>
-                        
+
                         <aside className='flex flex-col h-[120px] pl-4 py-2 w-full sxs:w-[60%] box-border overflow-x-hidden'>
                             <header 
                                 className='h-[25%] flex items-center font-roboto2 text-xl relative overlow-hidden'
