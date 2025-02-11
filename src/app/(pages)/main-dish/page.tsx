@@ -5,12 +5,12 @@ import Image from 'next/image';
 
 const page = () => {
     return (
-        <div className=' min-h-[calc(100vh-64px)] flex flex-col'>
+        <div className=' min-h-[calc(100dvh-64px)] flex flex-col'>
             <MainDish/>
             <footer className='mt-auto bg-[#b1a9a4] grid grid-cols-2 py-6'>
                 <section className='w-full'>
                     <h1 className='text-[#000000] font-roboto2 text-center'>Payment</h1>
-                    <ul className='grid grid-cols-3 px-2 items-center justify-items-center'>
+                    <ul className='grid grid-cols-2 sxs:grid-cols-3 px-2 items-center justify-items-center'>
                         <li className='relative w-10 h-10'>
                             <Image
                                 src="/assets/logo/visa.png" alt=""

@@ -30,7 +30,7 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
     const filter = useSelector((state:Filter)=> state.search);
     const [btn,setBtn] = useState<boolean>(false)
     const [data ,setData] = useState(fetchData);
-    
+
     useEffect(()=>{
         let updatedData = [...fetchData]; // Start with the full product list
 
@@ -49,7 +49,8 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
                 item.name.toLowerCase().includes(filter.search.toLowerCase()) // Case-insensitive match
             );
         }
-
+        console.log(data);
+        
         setData(updatedData);
         
     },[filter,btn]);
@@ -57,12 +58,14 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
     return (
         <div className="flex flex-col">
             <div className="flex">
-                <div className="flex items-center" onClick={()=>setBtn(!btn)}>
+                
+                <div className="flex items-center " onClick={()=>setBtn(!btn)}>
                     <h2 
                         className="tracking-wider font-roboto2 pl-2 relative "
                     >filter</h2>
                     <div className="flex items-center"><CiFilter/></div>
                 </div>
+                
                 {
                     btn && 
                     <div 
@@ -96,7 +99,9 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
                     </div>
                 }
             </div>
-           
+           {
+                data?.length === 0 && <h1 className='text-md font-poppins p-2'>No foods found</h1>
+           }
             <MainDishProductLayout products={data}/>
            
            

@@ -55,7 +55,7 @@ const Sales = () => {
                 </section>
 
                 <section className="flex flex-col items-center sxs:flex-row justify-center pb-4">
-                    <figure className="relative w-full h-[15rem] sxs:w-[50%] sxs:h-[300px] flex justify-center items-center overflow-hidden">
+                    <figure className="relative w-full h-[15rem] sxs:w-[50%] sxs:h-[300px] flex justify-center items-center">
                         <Image
                             src={Img2}
                             alt="Sale image showcasing products"
