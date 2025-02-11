@@ -1,8 +1,9 @@
-
+'use client'
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import {setOrder} from '@/app/redux/order'
 
 type Data = {
     name:string
@@ -12,20 +13,53 @@ type Data = {
     _id:string
 }
 
-type Prop ={
+type Prop = {
     products :Data[]
 }
 
+type State = {
+    order:{
+        order_Obj: Data[]
+    }
+}
+
 const MainDishProductLayout:React.FC<Prop> = ({products}) => {
-    
+    const dispatch = useDispatch();
+    const order = useSelector((state:State)=>state.order.order_Obj);
+
+    const handleDispatch = ({name,price,description,url,_id}:Data) =>{
+
+        if(order.some((item:Data) => item._id === _id)){
+            console.log('item already exist');
+            return
+        }
+        
+
+       dispatch(setOrder({
+        name:name,
+        price:price,
+        description:description,
+        url:url,
+        _id:_id
+       }))
+       
+    }
+
     return (
         <main className='grid grid-cols-1 sxs:grid-cols-2 xs:grid-cols-3 px-1 mb-2'>
             {
                 products.map((item:Data,index:number)=>(
-                   
-                    <Link 
-                        href={`/order/${item._id}`}
+                    
+                    <Link
+                        href={`/order`}
                         className='h-[200px] w-full flex justify-center items-center'
+                        onClick={() => handleDispatch({
+                            name:item.name,
+                            price:item.price,
+                            description:item.description,
+                            url:item.url,
+                            _id:item._id
+                        })}
                         key={index}
                     >
                         <div 

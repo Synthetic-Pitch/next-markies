@@ -5,6 +5,7 @@ import {setByPrice,setAlphabetical,setNoFilter} from "@/app/redux/search"
 import { useEffect, useState } from "react";
 import MainDishProductLayout from "../product-layout/smallScreen/mainDish-product-layout";
 import { CiFilter } from "react-icons/ci";
+
 type Data = {
     name: string;
     price: string;
@@ -13,10 +14,10 @@ type Data = {
     _id: string;
 }
 
-type SortData ={
+type SortData = {
     fetchData:Data[]
-    
 }
+
 type Filter = {
     search : {
         search:string
@@ -29,7 +30,7 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
     const filter = useSelector((state:Filter)=> state.search);
     const [btn,setBtn] = useState<boolean>(false)
     const [data ,setData] = useState(fetchData);
-
+    
     useEffect(()=>{
         let updatedData = [...fetchData]; // Start with the full product list
 
