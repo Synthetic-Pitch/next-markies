@@ -15,12 +15,12 @@ type Data = {
 const SearchBar = () => {
     const dispatch = useDispatch();
     const pathname = usePathname();
-    const filter =useSelector((state:Data)=>state.search.search)
+    const filter =useSelector((state:Data)=>state.search.search);
     
     if(pathname === '/main-dish' || pathname === '/desert' || pathname === '/beverage'){
         return (
             <div className='w-[40%] h-[50%] flex items-center justify-center bg-[white] px-2 rounded-full gap-1'>
-
+                
                 <label htmlFor="search"><CiSearch/></label>
                 <input 
                     id='search'

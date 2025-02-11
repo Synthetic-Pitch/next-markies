@@ -7,8 +7,8 @@ export async function GET() {
     await MongoDbConnect();
     
     try {
-        const beverages = await FoodsModel.find({category: "desert"}).limit(20);
-        const response = NextResponse.json(beverages, { status: 200 });
+        const desert = await FoodsModel.find({category: "desert"}).limit(20);
+        const response = NextResponse.json(desert, { status: 200 });
         return response;
     }
     

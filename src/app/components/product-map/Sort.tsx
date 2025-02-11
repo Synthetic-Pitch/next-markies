@@ -1,10 +1,10 @@
 'use client'
 
 import { useDispatch, useSelector } from "react-redux";
-import {setByPrice,setAlphabetical} from "@/app/redux/search"
+import {setByPrice,setAlphabetical,setNoFilter} from "@/app/redux/search"
 import { useEffect, useState } from "react";
 import MainDishProductLayout from "../product-layout/smallScreen/mainDish-product-layout";
-
+import { CiFilter } from "react-icons/ci";
 type Data = {
     name: string;
     price: string;
@@ -38,6 +38,8 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
             updatedData = updatedData.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
         } else if (filter.sort === "alphabetical") {
             updatedData = updatedData.sort((a, b) => a.name.localeCompare(b.name));
+        } else if(filter.sort === "noFilter") {
+            updatedData = [...fetchData];
         }
 
         // ✅ Apply search filtering
@@ -54,9 +56,12 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
     return (
         <div className="flex flex-col">
             <div className="flex">
-                <h2 
-                    className="tracking-wider font-roboto2 pl-2 relative " onClick={()=>setBtn(!btn)}
-                >filter</h2>
+                <div className="flex items-center" onClick={()=>setBtn(!btn)}>
+                    <h2 
+                        className="tracking-wider font-roboto2 pl-2 relative "
+                    >filter</h2>
+                    <div className="flex items-center"><CiFilter/></div>
+                </div>
                 {
                     btn && 
                     <div 
@@ -68,21 +73,21 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
                                         className="text-sm font-poppins p-2 cursor-pointer" 
                                         onClick={()=>{
                                             dispatch(setByPrice())
-                                            console.log(filter);
+                                            setBtn(!btn);
                                         }}
                                     >byPrice</li>
                                     <li 
                                         className="text-sm font-poppins p-2 cursor-pointer" 
                                         onClick={()=>{
                                             dispatch(setAlphabetical())
-                                            console.log(filter);
+                                            setBtn(!btn);
                                         }}
                                     >alphabetical</li>
                                     <li 
                                         className="text-sm font-poppins p-2 cursor-pointer" 
                                         onClick={()=>{
-                                            dispatch(setByPrice())
-                                            console.log(filter);
+                                            dispatch(setNoFilter())
+                                            setBtn(!btn);
                                         }}
                                     >noFilter</li>
                                 </ul>

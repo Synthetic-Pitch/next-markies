@@ -16,11 +16,14 @@ const Search = createSlice({
         setByPrice : (state) => {
             state.sort = "byPrice"
         },
+        setNoFilter : (state) => {
+            state.sort = "noFilter"
+        },
         setAlphabetical : (state) => {
             state.sort = "alphabetical"
         }
 
 }})
 
-export const {setSearch,setByPrice,setAlphabetical} = Search.actions;
+export const {setSearch,setByPrice,setAlphabetical,setNoFilter} = Search.actions;
 export default Search.reducer;

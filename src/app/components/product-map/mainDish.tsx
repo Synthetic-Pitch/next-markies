@@ -22,7 +22,6 @@ async function GetProducts() {
 export default async function MainDish() {
     cookies();
     const data = await GetProducts();
-    console.log(data);
     
     return (
       <div className="bg-[#ffffff]">
