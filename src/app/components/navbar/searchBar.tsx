@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { CiSearch } from "react-icons/ci";
 import { useDispatch, useSelector } from 'react-redux';
 import {setSearch} from '@/app/redux/search'
@@ -16,10 +16,6 @@ const SearchBar = () => {
     const dispatch = useDispatch();
     const pathname = usePathname();
     const filter =useSelector((state:Data)=>state.search.search)
-    
-    useEffect(()=>{
-        console.log(filter);
-    },[filter])
     
     if(pathname === '/main-dish' || pathname === 'desert'){
         return (

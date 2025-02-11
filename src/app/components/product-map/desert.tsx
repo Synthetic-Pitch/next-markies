@@ -15,7 +15,6 @@ async function GetProducts() {
 export default async function Desert ()  {
     cookies();
     const data = await GetProducts();
-    console.log(data);
     
     return (
         <div>
