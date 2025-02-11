@@ -35,7 +35,7 @@ const Sales = () => {
                         <Image
                             src={DscImg1}
                             alt="Discount 1"
-                            width={100}
+                            width={60}
                             height={70}
                             className='absolute -top-4 sxs:top-2 sxs:-right-2 right-0'
                         />
@@ -66,7 +66,7 @@ const Sales = () => {
                         <Image
                             src={DscImg2}
                             alt="Discount 2"
-                            width={100}
+                            width={60}
                             height={70}
                             className='absolute -top-4 sxs:top-2 sxs:-right-2 right-0'
                         />

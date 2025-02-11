@@ -70,6 +70,11 @@ const Slide:React.FC = () => {
             className='py-4 px-8' href={"/order"}
           >Order</Link>
 
+          <Link
+            onClick={handleDispatch}
+            className='py-4 px-8' href={"/profile"}
+          >Profile</Link>
+
           <div
             onClick={handleAdmin}
             className='py-4 px-8'>

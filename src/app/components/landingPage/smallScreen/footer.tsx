@@ -3,6 +3,9 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { SiInstagram } from "react-icons/si";
 import { FaSquareXTwitter } from "react-icons/fa6";
 const Footer = () => {
+    function getYear() {
+        return new Date().getFullYear();
+    }
     return (
         <footer className='bg-[gray] h-[9rem] w-full flex'>
             <figure className='w-[50%] h-full flex flex-col'>
@@ -34,7 +37,7 @@ const Footer = () => {
                         <FaSquareXTwitter className='h-[19px] w-[19px]'/>
                     </li>
                     <li className='h-[20px]'>
-                        <span className='text-[12px]'>© allright reserved</span>
+                        <span className='text-[12px]'>© {getYear()} allright reserved</span>
                     </li>
                 </ul>
             </aside>

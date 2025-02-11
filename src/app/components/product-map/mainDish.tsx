@@ -20,12 +20,12 @@ async function GetProducts() {
 }
 
 export default async function MainDish() {
-    cookies();
+    cookies(); //to make this dynmaic component
     const data = await GetProducts();
     
     return (
-      <div className="bg-[#ffffff]">
-        <Sort fetchData={data}/>
-      </div>
+      
+      <Sort fetchData={data}/>
+      
     )
 }
