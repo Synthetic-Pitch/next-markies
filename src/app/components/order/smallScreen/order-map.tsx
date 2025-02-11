@@ -1,8 +1,9 @@
 'use client'
 import Image from 'next/image';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { incrementQuantity,decrementQuantity } from '@/app/redux/order'
 
 type Data = {
     name:string
@@ -10,6 +11,7 @@ type Data = {
     description:string
     url:string
     _id:string
+    quantity:number
 }
 
 type State = {
@@ -21,14 +23,23 @@ type State = {
 const OrderMap = () => {
     const order = useSelector((state:State) => state.order.order_Obj);
     console.log(order);
+    const dispatch = useDispatch();
+
+    const Increment = (id:string) => {
+        dispatch(incrementQuantity(id));
+    }
+    const Decrement = (id:string) => {
+        
+        dispatch(decrementQuantity(id));
+    }
     
     return (
         <main className='pt-2 w-full flex flex-col items-center justify-center gap-2'>
             {
                 order.length > 0 && 
                 order.map((item,index)=>(
-                    <Link 
-                        href={`/order/${item._id}`}
+                    <main 
+                        
                         key={index}
                         className='min-h-[120px] w-[95%] bg-[#d8d8d8] flex flex-col sxs:flex-row'
                     >
@@ -40,7 +51,7 @@ const OrderMap = () => {
                                 />
                             </div>
                         </figure>
-
+                        
                         <aside className='flex flex-col h-[120px] pl-4 py-2 w-full sxs:w-[60%] box-border overflow-x-hidden'>
                             <header 
                                 className='h-[25%] flex items-center font-roboto2 text-xl relative overlow-hidden'
@@ -59,12 +70,18 @@ const OrderMap = () => {
                                 className='h-[25%] flex items-center '
                                 >
                                 
-                                <button className='h-[90%] w-[17%] bg-[#b3b2b2] '>+</button>
-                                <h3 className='font-roboto2 px-2 text-[#636363]'>quantity</h3>
-                                <button className='h-[90%] w-[17%] bg-[#b3b2b2] '>&#8722;</button>
+                                <button 
+                                    onClick={()=>Increment(item._id)}
+                                    className='h-[90%] w-[17%] bg-[#b3b2b2] '
+                                >+</button>
+                                <h3 className='font-roboto2 px-2 text-[#636363]'>{item.quantity}</h3>
+                                <button 
+                                    onClick={()=>Decrement(item._id)}
+                                    className='h-[90%] w-[17%] bg-[#b3b2b2] '
+                                >&#8722;</button>
                             </div>
                         </aside>
-                    </Link>
+                    </main>
                 ))
             }
         </main>

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 
 type State = {
     order_Obj: {
@@ -7,6 +7,7 @@ type State = {
         description: string;
         url: string;
         _id: string;
+        quantity:number;
     }[];
     subTotal: number;
 };
@@ -22,9 +23,21 @@ const OrderSlice = createSlice({
     reducers:{
         setOrder : (state,order) => {
             state.order_Obj.push(order.payload);
+        },
+        incrementQuantity: (state, action: PayloadAction<string>) => {
+            const item = state.order_Obj.find(order => order._id === action.payload);
+            if (item && item.quantity < 20) {
+                item.quantity += 1;
+            }
+        },
+        decrementQuantity: (state, action: PayloadAction<string>) => {
+            const item = state.order_Obj.find(order => order._id === action.payload);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+            }
         }
     }
 });
 
-export const { setOrder } = OrderSlice.actions;
+export const { setOrder,incrementQuantity,decrementQuantity } = OrderSlice.actions;
 export default OrderSlice.reducer

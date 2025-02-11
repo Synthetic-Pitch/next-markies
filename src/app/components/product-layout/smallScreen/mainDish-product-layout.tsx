@@ -28,23 +28,20 @@ const MainDishProductLayout:React.FC<Prop> = ({products}) => {
     const order = useSelector((state:State)=>state.order.order_Obj);
 
     const handleDispatch = ({name,price,description,url,_id}:Data) =>{
-
         if(order.some((item:Data) => item._id === _id)){
             console.log('item already exist');
             return
         }
-        
-
-       dispatch(setOrder({
-        name:name,
-        price:price,
-        description:description,
-        url:url,
-        _id:_id
-       }))
-       
+        dispatch(setOrder({
+            name:name,
+            price:price,
+            description:description,
+            url:url,
+            _id:_id,
+            quantity:1
+        }))
     }
-
+    
     return (
         <main className='grid grid-cols-1 sxs:grid-cols-2 xs:grid-cols-3 px-1 mb-2'>
             {
