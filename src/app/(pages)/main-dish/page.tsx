@@ -1,12 +1,12 @@
 import MainDish from '@/app/components/product-map/mainDish'
 import React from 'react'
 import Image from 'next/image';
-
+import { Suspense } from 'react';
 
 const page = () => {
     return (
         <div className=' min-h-[calc(100dvh-64px)] flex flex-col'>
-            <MainDish/>
+            <Suspense fallback={<div>Loading...</div>}><MainDish/></Suspense>
             <footer className='mt-auto bg-[#b1a9a4] grid grid-cols-2 py-6'>
                 <section className='w-full'>
                     <h1 className='text-[#000000] font-roboto2 text-center'>Payment</h1>
