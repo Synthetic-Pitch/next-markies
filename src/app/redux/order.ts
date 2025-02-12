@@ -35,9 +35,16 @@ const OrderSlice = createSlice({
             if (item && item.quantity > 1) {
                 item.quantity -= 1;
             }
+        },
+        removeItem : (state,action:PayloadAction<string>) => {
+            const item = state.order_Obj.find(order => order._id === action.payload);
+            if(item){
+                state.order_Obj  = state.order_Obj.filter(order => order._id !== action.payload);
+            }
         }
+        
     }
 });
 
-export const { setOrder,incrementQuantity,decrementQuantity } = OrderSlice.actions;
+export const { setOrder,incrementQuantity,decrementQuantity,removeItem } = OrderSlice.actions;
 export default OrderSlice.reducer

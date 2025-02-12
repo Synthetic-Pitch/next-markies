@@ -1,9 +1,9 @@
 'use client'
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { incrementQuantity,decrementQuantity } from '@/app/redux/order'
+import "./style.css"
+import { incrementQuantity,decrementQuantity,removeItem } from '@/app/redux/order'
 
 type Data = {
     name:string
@@ -23,6 +23,7 @@ type State = {
 const OrderMap = () => {
     const order = useSelector((state:State) => state.order.order_Obj);
     const dispatch = useDispatch();
+    const [isAnimate,setAnimate] = useState<Set<string>>(new Set());
 
     const Increment = (id:string) => {
         dispatch(incrementQuantity(id));
@@ -30,16 +31,27 @@ const OrderMap = () => {
     const Decrement = (id:string) => {
         dispatch(decrementQuantity(id));
     }
+    const removeItemHandler = (id:string) => {
+        setAnimate(prev=> new Set(prev).add(id));
+        setTimeout(() => {
+            dispatch(removeItem(id));
+            setAnimate(prev => {
+                const newSet = new Set(prev);
+                newSet.delete(id);
+                return newSet;
+            });
+        }, 500);
+        
+    }
     
     return (
-        <main className='w-full  flex flex-col items-center justify-center gap-2 '>
+        <div className='w-full  flex flex-col items-center justify-center gap-2 '>
             {
                 order.length > 0 && 
                 order.map((item,index)=>(
-                    <main 
-                        
+                    <main
                         key={index}
-                        className='min-h-[120px] w-[95%] bg-[#d8d8d8] flex flex-col sxs:flex-row'
+                        className={`min-h-[120px] w-[95%] bg-[#dbdbdb] flex flex-col sxs:flex-row ${isAnimate.has(item._id) ? 'order-map-remove-item' : ''}`}
                     >
                         <figure className='w-full sxs:w-[40%] h-[120px] bg-[#b3b3b3] flex justify-center'>
                             <div className='h-full w-[60%] sxs:w-full relative'>
@@ -64,11 +76,10 @@ const OrderMap = () => {
                                         {item.description}
                                     </h2>
                             </article>
-                            <div 
-                                className='h-[25%] flex items-center '
+                            <footer 
+                                className='h-[25%] flex items-center'
                                 >
-                                
-                                <button 
+                                <button
                                     onClick={()=>Increment(item._id)}
                                     className='h-[90%] w-[17%] bg-[#b3b2b2] '
                                 >+</button>
@@ -77,12 +88,17 @@ const OrderMap = () => {
                                     onClick={()=>Decrement(item._id)}
                                     className='h-[90%] w-[17%] bg-[#b3b2b2] '
                                 >&#8722;</button>
-                            </div>
+
+                                <button 
+                                    onClick={()=>removeItemHandler(item._id)}
+                                    className=' ml-auto px-2 bg-[#f09c9c] font-serif text-sm py-1 text-gray-600'
+                                >remove</button>
+                            </footer>
                         </aside>
                     </main>
                 ))
             }
-        </main>
+        </div>
     );
 };
 

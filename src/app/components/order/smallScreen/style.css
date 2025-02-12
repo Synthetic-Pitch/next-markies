@@ -1,0 +1,16 @@
+.order-map-remove-item{
+    animation:slideRemove 1000ms ease-out;
+    ;
+}
+
+@keyframes slideRemove{
+    0%{
+        transform: translateX(0%);
+    }
+    20%{
+        transform: translateX(-10%);
+    }
+    100%{
+        transform: translateX(200vw);
+    }
+}

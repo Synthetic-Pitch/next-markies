@@ -2,12 +2,16 @@ import Desert from '@/app/components/product-map/desert';
 import React from 'react';
 import Image from 'next/image';
 import { Suspense } from 'react';
+
+
 const Page = () => {
+
     return (
-        <div className='min-h-[calc(100dvh-64px)] flex flex-col'>
-            
+        <div 
+            className='min-h-[calc(100dvh-64px)] flex flex-col'>
             <Suspense fallback={<div>Loading...</div>}><Desert/></Suspense>
-            <footer className='mt-auto bg-[#b1a9a4] grid grid-cols-2 py-6'>
+            
+            <footer className='mt-auto grid grid-cols-2 py-6 bg-[#9e9d9d]'>
                 <section className='w-full flex flex-col items-center'>
                     <h1 className='text-[#000000] font-roboto2 text-center'>Logistics</h1>
                     <ul className='grid grid-cols-2 sxs:grid-cols-3 px-2 items-center justify-items-center gap-y-2 pt-1 max-w-[200px] gap-x-2'>

@@ -16,7 +16,7 @@ const OrderFooter = () => {
     
     if(order.length > 0){
         return (
-            <div className='h-[150px] w-full bg-[#fff1ccaf]'>
+            <div className='h-[150px] w-full bg-[#83827e]'>
                 footer
             </div>
         )
