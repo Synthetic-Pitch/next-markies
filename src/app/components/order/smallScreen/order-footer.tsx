@@ -10,9 +10,13 @@ import Basket from '../../../../../public/assets/logo/basket.png'
 import {setCurrentAt} from '@/app/redux/order'
 import './style.css'
 import { FaAngleDoubleDown } from "react-icons/fa";
+import { parse } from 'path';
+import { log } from 'console';
 
 type Data = {
     name:string
+    quantity:number
+    price:string
 }
 
 type State  = {
@@ -27,6 +31,7 @@ type Iscurrent = {
 }
 
 const OrderFooter = () => {
+    
     const order = useSelector((state:State)=>state.order.order_Obj);
     const isCurrentAt = useSelector((state:Iscurrent) => state.order.isCurrentAt);
     const Ref = useRef<HTMLDivElement>(null);
@@ -46,11 +51,10 @@ const OrderFooter = () => {
             setAnimaUp(!animaUp);
         }
     };
-    useEffect(() => {
 
+    useEffect(() => {
             if(Ref.current && RefArror.current) {
                 setIsOnce(true);
-                
             }
             if(isOnce){
                 if (animaUp && RefArror.current) {        
@@ -64,11 +68,8 @@ const OrderFooter = () => {
                     RefArror.current.classList.remove('order-footer-arrow-up');
                 }
             }
-            
-        
-        
-  
-    }, [animaUp]);
+
+    }, [animaUp,isOnce]);
 
     if(order.length > 0){
         return (
@@ -84,7 +85,7 @@ const OrderFooter = () => {
                                     src={Basket} alt=''
                                     fill
                                 />
-                                <span className='absolute -top-3 -right-2 py-[1px] px-2 rounded-full bg-[#d38080] text-[white] text-[12px]'>2</span>
+                                <span className='absolute -top-3 -right-2 py-[1px] px-2 rounded-full bg-[#d38080] text-[white] text-[12px]'>{order.length}</span>
                             </div>
                         </figure>
                     </div>
@@ -92,7 +93,7 @@ const OrderFooter = () => {
                     <section 
                         ref={RefArror}
                         onClick={handleArrowDown}
-                        className='relative bg-[#c5c5c5] w-10 h-10 flex justify-center items-center p-2 '><FaAngleDoubleDown/>
+                        className='relative bg-[rgba(190,190,190,0.9)] w-10 h-10 flex justify-center items-center p-2 '><FaAngleDoubleDown/>
                     </section>
                     
                     <ul className='hidden h-full w-[60%] sxs:flex justify-evenly items-end bg-[rgba(190,190,190,0.9)] rounded-tl-[25px] '>
@@ -132,7 +133,7 @@ const OrderFooter = () => {
                     </ul>
                 </header>
                 <main className='bg-[gray] w-full h-full relative'>
-                    <Footer/>
+                    <Footer order={order}/>
                 </main>
             </div>
         )
@@ -142,8 +143,26 @@ const OrderFooter = () => {
 
 export default OrderFooter;
 
-export const Footer = () => {
+
+// FOOTER MAIN--
+type FooterProps = {
+    order: Data[]
+};
+
+export const Footer = ({order}: FooterProps) => {
+    
+    // Calculate each price * quantity forLoop each object
+    let total = 0
+    for(let i = 0; i < order.length; i++){
+        const item = parseFloat(order[i].price)
+        const calc = item * order[i].quantity
+        console.log(calc);
+        total += calc
+        
+    }
     return(
-        <div>footerasd</div>
+        <div>
+            <p>Total: &#x20B1;{total.toFixed(2)}</p>
+        </div>
     )
 }
