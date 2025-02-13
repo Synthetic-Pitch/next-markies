@@ -79,7 +79,7 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
                                             setBtn(!btn);
                                         }}
                                     >byPrice</li>
-                                    <li 
+                                    <li
                                         className="text-sm font-poppins p-2 cursor-pointer" 
                                         onClick={()=>{
                                             dispatch(setAlphabetical())

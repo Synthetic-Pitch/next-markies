@@ -31,8 +31,6 @@ const MainDishProductLayout:React.FC<Prop> = ({products}) => {
     const [isAdded,setAdd] = useState<Set<string>>(new Set());
 
     const handleDispatch = ({name,price,description,url,_id}:Data) =>{
-        const exist = order.some((item:Data) => item._id === _id);
-        console.log(exist);
         
         if(order.some((item:Data) => item._id === _id)){
             console.log('item already exist');
@@ -103,7 +101,7 @@ const MainDishProductLayout:React.FC<Prop> = ({products}) => {
                         >
                             <div >
                                 <header 
-                                    className='bg-[#d1e2df] rounded-l-full max-w-min px-2 -rotate-[20deg] relative font-poppins z-20'>&#x20B1;&nbsp;{item.price}
+                                    className='bg-[#d1e2df] rounded-l-full max-w-min px-2 -rotate-[20deg] relative font-poppins z-[5]'>&#x20B1;&nbsp;{item.price}
                                 </header>
                                 <main
                                     onClick={()=> route.push(`/order`)}

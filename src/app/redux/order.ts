@@ -10,11 +10,13 @@ type State = {
         quantity:number;
     }[];
     subTotal: number;
+    isCurrentAt: 'default' | 'mainDish' | 'desert' | 'beverage'
 };
 
 export const initialState: State = {
     order_Obj: [], // ✅ Start with an empty array
     subTotal: 0,
+    isCurrentAt:'default'
 };
 
 const OrderSlice = createSlice({
@@ -41,10 +43,13 @@ const OrderSlice = createSlice({
             if(item){
                 state.order_Obj  = state.order_Obj.filter(order => order._id !== action.payload);
             }
+        },
+        setCurrentAt : (state,action) => {
+            state.isCurrentAt = action.payload
         }
         
     }
 });
 
-export const { setOrder,incrementQuantity,decrementQuantity,removeItem } = OrderSlice.actions;
+export const { setOrder,incrementQuantity,decrementQuantity,removeItem,setCurrentAt } = OrderSlice.actions;
 export default OrderSlice.reducer

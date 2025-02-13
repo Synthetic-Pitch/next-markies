@@ -11,7 +11,6 @@ type Data = {
     _id:string;
 }
 
-
 async function GetProducts() {
     'use server'
     const response = await fetch('https://next-markies.vercel.app/api/get/mainDish')
