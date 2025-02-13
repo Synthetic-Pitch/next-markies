@@ -10,8 +10,7 @@ import Basket from '../../../../../public/assets/logo/basket.png'
 import {setCurrentAt} from '@/app/redux/order'
 import './style.css'
 import { FaAngleDoubleDown } from "react-icons/fa";
-import { parse } from 'path';
-import { log } from 'console';
+
 
 type Data = {
     name:string
