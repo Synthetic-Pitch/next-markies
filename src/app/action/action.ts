@@ -5,17 +5,17 @@ import VoucherModel from "../model/voucher";
 import cloudinary from "../../../lib/cloudinary";
 
 
+
 export async function VoucherAction(formdata:FormData){
     await MongoDbConnect();
     let success
     const discount = formdata.get('discount') as string
     const image = formdata.get('voucherImage') as File
-    const shippingFree = formdata.get('hasShipping') as string
-    const ParseDiscount = parseFloat(discount)
-    const isShippingFree = shippingFree === 'on'
-
+    const shippingFree = formdata.get('hasShipping')  === 'on' ? true : false
+    const stocks = formdata.get("stocks") as string
     
-    if(discount === null || image === null){
+    
+    if(discount === null || image === null || stocks.length === 0){
         success = false
         console.log(formdata);
     }
@@ -37,16 +37,18 @@ export async function VoucherAction(formdata:FormData){
         // Pipe the file buffer to the upload stream
         uploadStream.end(buffer);
     });
+
     await VoucherModel.create({
         url:(sendToClaudinary as {secure_url : string}).secure_url,
-        discount:ParseDiscount,
-        freeShipping:isShippingFree
+        discount:parseFloat(discount),
+        freeShipping:shippingFree,
+        stocks:parseInt(stocks)
     })
     success = true
+
     
-  
     return {
-        success
+        success,
     }
 }
 

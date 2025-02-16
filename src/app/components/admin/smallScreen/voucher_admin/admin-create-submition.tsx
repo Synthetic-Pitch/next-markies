@@ -6,11 +6,13 @@ import Image from "next/image";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 
 
+
 export default function AdminCreateSubmition() {
     const [imageSRC, setImageSRC] = useState<string>('');
     const [discount, setDiscount] = useState<string>('');
     const formRef = useRef<HTMLFormElement>(null);
     const [tooltip, setTooltip] = useState(false);
+    const [stocks, setStocks] = useState<string>('');
 
     const handleAction = async (formData: FormData) => {
         console.log('imageSRC');
@@ -37,6 +39,7 @@ export default function AdminCreateSubmition() {
         formRef.current?.reset();
         setImageSRC('');
         setDiscount('');
+        setStocks('');
     }
 
     const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +50,7 @@ export default function AdminCreateSubmition() {
         const url = URL.createObjectURL(selectedFile);
         setImageSRC(url);
     }
-    
+
     return (
         <form action={handleAction} ref={formRef}>
             <div className="flex justify-center py-2">
@@ -57,7 +60,7 @@ export default function AdminCreateSubmition() {
                     data-tooltip-id="tooltip"
                     htmlFor="image" 
                     className="text-md px-4 py-2 border-dotted border-2 border-[gray]"
-                >Input Image</label>
+                >voucher image</label>
                 
                 <input id="image" type="file" name="voucherImage" className="hidden" accept="image/*" onChange={handleImage} />
             </div>
@@ -89,6 +92,22 @@ export default function AdminCreateSubmition() {
                         setDiscount(val);
                     }}
                 />
+            </div>
+            <div className="flex justify-center gap-2 text-md font-poppins mt-2">
+                <div>
+                    stocks :
+                </div>
+                <input 
+                    required name="stocks" type="text" 
+                    className=" outline-none border-[1px] min-[360px]:w-[100px] border-[gray] px-2"
+                    value={stocks} 
+                    onChange={(e)=>{
+                        const val = e.target.value.replace(/[^0-9]/g, '');
+                        const parse = parseInt(val);
+                        if(parse > 1000) return
+                        setStocks(val);
+                    }}
+                    />
             </div>
             <div className="flex justify-center mt-4">
                 <button 

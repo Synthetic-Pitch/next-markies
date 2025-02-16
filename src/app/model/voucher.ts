@@ -9,10 +9,9 @@ export interface IFoods extends Document{
 const foodSchema :Schema = new Schema({
     url:{type: String, required :true},
     discount:{type:Number,required:true},
-    freeShipping:{type:Boolean,required:true}
+    freeShipping:{type:Boolean,required:true},
+    stocks:{type:Number,required:true},
 },{timestamps:true});
-
-
 
 // create collection model
 const VoucherModel: Model<IFoods> = 

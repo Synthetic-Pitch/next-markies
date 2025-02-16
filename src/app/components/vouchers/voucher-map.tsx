@@ -9,7 +9,6 @@ const VoucherMap = async () => {
     cookies();
 
     const data = await VoucherGET();
-    
     return (
         <div>
             {
