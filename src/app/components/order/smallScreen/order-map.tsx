@@ -35,6 +35,7 @@ const OrderMap = () => {
     }
     const removeItemHandler = (id:string) => {
         setAnimate(prev=> new Set(prev).add(id));
+        
         setTimeout(() => {
             dispatch(removeItem(id));
             setAnimate(prev => {
@@ -43,7 +44,6 @@ const OrderMap = () => {
                 return newSet;
             });
         }, 500);
-        
     }
     
     return (

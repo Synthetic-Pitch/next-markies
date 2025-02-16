@@ -9,7 +9,7 @@ import Footer from './components/landingPage/smallScreen/footer'
 const Page:React.FC = async () => {
     
     return (
-    <div className='relative z-0'>
+    <div className='relative z-0  overflow-hidden'>
         {/* FOR SMALL SCREEN */}
         <div className=''>
             <SmallScreen/>

@@ -5,6 +5,7 @@ import AdminAuth from './modal-components/adminAuth';
 import { useSelector } from 'react-redux';
 import UploadProgress from './modal-components/upload-progress';
 import SuccesUpload from './modal-components/succes-upload';
+import Payment from './modal-components/payment';
 
 
 type State = {
@@ -46,6 +47,7 @@ const ModalContainer = () => {
             <AdminAuth/>
             <UploadProgress/>
             <SuccesUpload/>
+            <Payment/>
         </main>
     );
 };

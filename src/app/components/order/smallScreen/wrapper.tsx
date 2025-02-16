@@ -13,7 +13,7 @@ export const BeverageWrapper = ({children}:{children:React.ReactNode}) => {
     
     if(isSelected === 'beverage'){
         return (
-            <div>
+            <div className="pb-5">
                 {children}
             </div>
         );
@@ -26,7 +26,7 @@ export const DesertWrapper = ({children}:{children:React.ReactNode}) => {
     
     if(isSelected === 'desert'){
         return (
-            <div>
+            <div className="pb-5">
                 {children}
             </div>
         );
@@ -39,7 +39,7 @@ export const MainDishWrapper = ({children}:{children:React.ReactNode}) => {
 
     if(isSelected === 'mainDish'){
         return (
-            <div>
+            <div className="pb-5">
                 {children}
             </div>
         );

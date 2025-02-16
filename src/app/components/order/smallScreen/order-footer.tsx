@@ -10,6 +10,7 @@ import Basket from '../../../../../public/assets/logo/basket.png'
 import {setCurrentAt} from '@/app/redux/order'
 import './style.css'
 import { FaAngleDoubleDown } from "react-icons/fa";
+import OrderFooterTotal from './order-footer-total';
 
 
 type Data = {
@@ -50,7 +51,7 @@ const OrderFooter = () => {
             setAnimaUp(!animaUp);
         }
     };
-
+    
     useEffect(() => {
             if(Ref.current && RefArror.current) {
                 setIsOnce(true);
@@ -67,7 +68,6 @@ const OrderFooter = () => {
                     RefArror.current.classList.remove('order-footer-arrow-up');
                 }
             }
-
     }, [animaUp,isOnce]);
 
     if(order.length > 0){
@@ -75,7 +75,7 @@ const OrderFooter = () => {
             <div className='h-[150px] w-full relative z-30'>
                 <header ref={Ref} className='absolute bottom-[100%] w-full h-[35%] flex justify-between gap-4 '>
 
-                    <div 
+                    <div
                         onClick={()=>dispatch(setCurrentAt('default'))}
                         className=' w-20 h-full top-0 left-0 flex justify-center items-end bg-[rgba(190,190,190,0.7)] rounded-tr-2xl box-content pr-3'>
                         <figure className={`relative h-[80%] w-[58%] flex justify-center items-center rounded-t-xl ${isCurrentAt === 'default' && 'order-footer-isSelected'}`}>
@@ -132,7 +132,7 @@ const OrderFooter = () => {
                     </ul>
                 </header>
                 <main className='bg-[gray] w-full h-full relative'>
-                    <Footer order={order}/>
+                    <OrderFooterTotal/>
                 </main>
             </div>
         )
@@ -143,25 +143,3 @@ const OrderFooter = () => {
 export default OrderFooter;
 
 
-// FOOTER MAIN--
-type FooterProps = {
-    order: Data[]
-};
-
-export const Footer = ({order}: FooterProps) => {
-    
-    // Calculate each price * quantity forLoop each object
-    let total = 0
-    for(let i = 0; i < order.length; i++){
-        const item = parseFloat(order[i].price)
-        const calc = item * order[i].quantity
-        console.log(calc);
-        total += calc
-        
-    }
-    return(
-        <div>
-            <p>Total: &#x20B1;{total.toFixed(2)}</p>
-        </div>
-    )
-}

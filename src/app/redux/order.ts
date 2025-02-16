@@ -1,5 +1,6 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 
+
 type State = {
     order_Obj: {
         name: string;
@@ -11,12 +12,21 @@ type State = {
     }[];
     subTotal: number;
     isCurrentAt: 'default' | 'mainDish' | 'desert' | 'beverage'
+    payment:boolean
+    voucher:boolean
+    voucher_Obj:{
+        url:string,
+        discount:number
+    }[];
 };
 
 export const initialState: State = {
     order_Obj: [], // ✅ Start with an empty array
     subTotal: 0,
-    isCurrentAt:'default'
+    isCurrentAt:'default',
+    payment:false,
+    voucher:false,
+    voucher_Obj:[]
 };
 
 const OrderSlice = createSlice({
@@ -39,17 +49,27 @@ const OrderSlice = createSlice({
             }
         },
         removeItem : (state,action:PayloadAction<string>) => {
-            const item = state.order_Obj.find(order => order._id === action.payload);
+            const item = state.order_Obj.find(order => order._id === action.payload); //Kapag may nahanap yung id na pinass sa parameter/payload then execute the if statement
             if(item){
                 state.order_Obj  = state.order_Obj.filter(order => order._id !== action.payload);
             }
         },
         setCurrentAt : (state,action) => {
             state.isCurrentAt = action.payload
+        },
+        setPayment : (state)=>{
+            state.payment = !state.payment
+        },
+        setVoucher : (state)=>{
+            state.voucher = !state.voucher
         }
         
     }
 });
 
-export const { setOrder,incrementQuantity,decrementQuantity,removeItem,setCurrentAt } = OrderSlice.actions;
+export const { 
+    setOrder,incrementQuantity,decrementQuantity,
+    removeItem,setCurrentAt,setPayment,
+    setVoucher
+} = OrderSlice.actions;
 export default OrderSlice.reducer

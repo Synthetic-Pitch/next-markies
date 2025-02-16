@@ -37,8 +37,6 @@ const Slide:React.FC = () => {
         dispatch(setAdminPanelOpen());
     };
     
-    
-  
     return (
       <div 
         className={`absolute top-[100%] z-50 bg-gradient-to-b from-[#a8a8a8] to-[#3d3d3d] w-[50vw] h-[100dvh] transition-[left] duration-500 ease-in-out ${Slide ? '-left-[0%]': '-left-[100%]'} `}
@@ -64,11 +62,15 @@ const Slide:React.FC = () => {
             onClick={handleDispatch} 
             className='py-4 px-8' href={"/beverage"}
           >Beverages</Link>
-
+          
           <Link 
             onClick={handleDispatch} 
             className='py-4 px-8' href={"/order"}
           >Order</Link>
+          <Link 
+            onClick={handleDispatch} 
+            className='py-4 px-8' href={"/voucher"}
+          >voucher</Link>
 
           <Link
             onClick={handleDispatch}
