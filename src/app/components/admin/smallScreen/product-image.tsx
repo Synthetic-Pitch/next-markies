@@ -59,7 +59,7 @@ const ProductImage = () => {
         dispatch(resetImg());
         setFileData(null);
     }
-
+    
 
     return (
         <div className='flex justify-center'>
