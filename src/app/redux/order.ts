@@ -17,6 +17,7 @@ type State = {
     voucher_Obj:{
         url:string,
         discount:number
+        freeShipping:boolean
     }[];
 };
 
@@ -62,7 +63,11 @@ const OrderSlice = createSlice({
         },
         setVoucher : (state)=>{
             state.voucher = !state.voucher
+        },
+        setVoucherObj: (state,action) => {
+            state.voucher_Obj.push(action.payload)
         }
+        
         
     }
 });
@@ -70,6 +75,6 @@ const OrderSlice = createSlice({
 export const { 
     setOrder,incrementQuantity,decrementQuantity,
     removeItem,setCurrentAt,setPayment,
-    setVoucher
+    setVoucher,setVoucherObj
 } = OrderSlice.actions;
 export default OrderSlice.reducer

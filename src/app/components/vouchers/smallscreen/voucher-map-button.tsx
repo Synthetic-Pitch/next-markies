@@ -1,28 +1,56 @@
 'use client'
-import React from 'react';
-import {VoucherClaim} from '@/app/action/action'
 
+import { VoucherClaim } from '@/app/action/action'
+import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import {setVoucherObj} from '@/app/redux/order'
 
 type Props = {
-    id:string
+    id: string
 }
 
 
-const VoucherMapButton:React.FC<Props> = ({id}) => {
+const VoucherMapButton: React.FC<Props> = ({ id }) => {
+    const btnRef = useRef<HTMLButtonElement>(null);
+    const dispatch = useDispatch();
+
     
-    const handleClaim = async (id:string) => {
-        const result =await VoucherClaim(id)   
-        if(!result.success){
-            alert('Voucher out of stock')
+    const handleClaim = async (id: string) => {
+        
+        
+        if (btnRef.current) {
+            btnRef.current.style.background = '#9b9b9b';
+            setTimeout(() => {
+                if (btnRef.current) {
+                    btnRef.current.style.background = '';
+                }
+            }, 500); // Change the background color for 700ms
         }
         
+        
+        const result = await VoucherClaim(id);
+
+        if(result.success){
+            dispatch(setVoucherObj(
+                {
+                    url:result.toPlain?.url as string,
+                    discount:result.toPlain?.disount as number,
+                    freeShipping:result.toPlain?.freeShipping as boolean
+                }
+            ))
+            
+        }
+       
     }
+
     return (
         <button
-            onClick={()=>handleClaim(id)} 
+            ref={btnRef}
+            onClick={() => handleClaim(id)}
             suppressHydrationWarning
-            className='bg-[#aaaaaa] font-roboto2'>
-            claim
+            className='font-poppins text-md w-[100px] bg-[#bbbbbb] mt-1'
+        >
+           Claim
         </button>
     );
 };

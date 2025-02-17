@@ -60,8 +60,6 @@ export async function VoucherGET(){
 }
 
 
-
-
 type VoucherType = {
     url: string;
     discount: number;
@@ -95,12 +93,20 @@ export async function VoucherClaim(id: string) {
         if (!updatedVoucher) {
             return { success: false, message: 'Voucher not found or out of stock' };
         }
+        
+        
+        const toPlain = {
+            url:VoucherID.url,
+            disount:VoucherID.discount,
+            freeShipping:VoucherID.freeShipping,
+        }
 
         revalidatePath('/vouchers');
 
         return { 
             success: true, 
-            message: 'Voucher claimed successfully'
+            message: 'Voucher claimed successfully',
+            toPlain
         };
 
     } catch (error) {

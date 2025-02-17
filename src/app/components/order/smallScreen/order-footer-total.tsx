@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPayment } from '@/app/redux/order';
+import { setPayment,setVoucher } from '@/app/redux/order';
 
 type Data = {
     price:string
@@ -35,12 +35,10 @@ const OrderFooterTotal = () => {
     },[order,order.length])
 
     const handlePayment = () => {
-        console.log('asd');
-        
         dispatch(setPayment());
     }
     const handleVoucher = () => {
-
+        dispatch(setVoucher())
     }
 
     return (
@@ -49,8 +47,14 @@ const OrderFooterTotal = () => {
                 <h2 className='font-poppins'>Subtotal: <span>&#x20B1;{total}</span></h2>
             </section>
             <main className='flex flex-col sxs:flex-row justify-evenly bg-[#636363]'>
-                <button onClick={handlePayment} className='p-1 sxs:p-3 text-[#cecece] font-poppins '>Payment</button>
-                <button onClick={handleVoucher} className='p-1 sxs:p-3 text-[#cecece] font-poppins'>Voucher</button>  
+                <button 
+                    onClick={handlePayment} 
+                    className='p-1 sxs:p-3 text-[#cecece] font-poppins '
+                >Payment</button>
+                <button 
+                    onClick={handleVoucher} 
+                    className='p-1 sxs:p-3 text-[#cecece] font-poppins'
+                >Voucher</button>  
             </main>
             <button  className='w-full flex-grow bg-[black] text-white font-roboto2'>
                 Checkout

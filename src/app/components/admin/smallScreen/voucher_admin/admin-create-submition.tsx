@@ -13,25 +13,37 @@ export default function AdminCreateSubmition() {
     const formRef = useRef<HTMLFormElement>(null);
     const [tooltip, setTooltip] = useState(false);
     const [stocks, setStocks] = useState<string>('');
+    const [loading,setLoading] = useState(false);
 
-    const handleAction = async (formData: FormData) => {
-        console.log('imageSRC');
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); // Prevent default form submission
         
-        if(imageSRC.length === 0){
+        if (loading) return; // Prevent multiple submissions
+        
+        if (imageSRC.length === 0) {
             setTooltip(true);
-            setTimeout(()=>{
+            setTimeout(() => {
                 setTooltip(false);
-            },800)
+            }, 800);
             return;
         }
+        
         if (!formRef.current) return;
         
-        const result = await VoucherAction(formData);
-        if (result.success) {
-            console.log(result);
-            resetForm();
-        } else {
-            console.log('error');
+        try {
+            setLoading(true);
+            const formData = new FormData(formRef.current);
+            const result = await VoucherAction(formData);
+            if (result.success) {
+                console.log(result);
+                resetForm();
+            } else {
+                console.log('error');
+            }
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -50,9 +62,9 @@ export default function AdminCreateSubmition() {
         const url = URL.createObjectURL(selectedFile);
         setImageSRC(url);
     }
-
+    
     return (
-        <form action={handleAction} ref={formRef}>
+        <form suppressHydrationWarning onSubmit={handleSubmit} ref={formRef}>
             <div className="flex justify-center py-2">
                 <ReactTooltip id="tooltip" isOpen={tooltip} style={{fontSize: '10px'}}/>
                 <label
@@ -111,6 +123,7 @@ export default function AdminCreateSubmition() {
             </div>
             <div className="flex justify-center mt-4">
                 <button 
+                    disabled={loading}
                     type="submit" 
                     className="flex justify-center font-roboto2 bg-[#dadada] px-6 py-2"
                 >Submit</button>
