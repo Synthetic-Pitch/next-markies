@@ -3,6 +3,7 @@
 import MongoDbConnect from "../../../lib/mongoDb"
 import VoucherModel from "../model/voucher";
 import cloudinary from "../../../lib/cloudinary";
+import { revalidatePath } from "next/cache";
 
 
 
@@ -56,4 +57,54 @@ export async function VoucherGET(){
     await MongoDbConnect();
     const vouchers = await VoucherModel.find({}).sort({createdAt:-1}).limit(50);
     return vouchers
+}
+
+
+
+
+type VoucherType = {
+    url: string;
+    discount: number;
+    freeShipping: boolean;
+    stocks: number;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+export async function VoucherClaim(id: string) {
+    try {
+        await MongoDbConnect();
+        const VoucherID = await VoucherModel.findById(id) as VoucherType;
+        
+        if(VoucherID.stocks <= 1 || !VoucherID){
+            await VoucherModel.findByIdAndDelete(id)
+            revalidatePath('/vouchers');
+            return{succes:false,message:'Voucher out of stock'}
+        }
+        
+        const updatedVoucher = await VoucherModel.findOneAndUpdate(
+            {
+                _id: id
+            },
+            { $inc: { stocks: -1 } },
+            { 
+                new: true,
+                runValidators: true 
+            }
+        ) as VoucherType;
+        
+        if (!updatedVoucher) {
+            return { success: false, message: 'Voucher not found or out of stock' };
+        }
+
+        revalidatePath('/vouchers');
+
+        return { 
+            success: true, 
+            message: 'Voucher claimed successfully'
+        };
+
+    } catch (error) {
+        console.error('Error claiming voucher:', error);
+        return { success: false, message: 'Failed to claim voucher' };
+    }
 }

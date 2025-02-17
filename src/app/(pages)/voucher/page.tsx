@@ -1,6 +1,7 @@
-import VoucherMap from '@/app/components/vouchers/voucher-map';
+
+import VoucherMap from '@/app/components/vouchers/smallscreen/voucher-map ';
 import React from 'react';
-import { Suspense } from 'react';
+
 
 const Voucher = () => {
     
@@ -8,9 +9,7 @@ const Voucher = () => {
     return (
         <div>
             <div>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <VoucherMap/>
-                </Suspense>
+                <VoucherMap/>
             </div>
         </div>
     )
