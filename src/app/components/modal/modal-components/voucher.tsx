@@ -1,13 +1,14 @@
 'use client'
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {setVoucher} from '@/app/redux/order'
+import {setVoucher,setVoucherID,setisVoucher} from '@/app/redux/order'
 import Image from 'next/image';
 
 type Data = {
     url:string,
     discount:number
     freeShipping:boolean
+    id:string
 }
 
 type State = {
@@ -17,11 +18,13 @@ type State = {
     }
 }
 
+
 const Voucher = () => {
     const voucher = useSelector((state:State)=>state.order.voucher)
     const dispatch = useDispatch();
     const voucherRef = useRef<HTMLDialogElement>(null);
     const VoucherOBJ = useSelector((state:State)=> state.order.voucher_Obj)
+
     
     useEffect(()=>{
         if(voucher){
@@ -30,28 +33,47 @@ const Voucher = () => {
             voucherRef.current?.close();
         }
     },[voucher])
-
+    
     const handleClose = () => dispatch(setVoucher());
     
-    return (
-        <dialog ref={voucherRef} className='w-[90%] h-[300px]'>
-            <div className='w-full h-[90%] overflow-y-scroll flex flex-col p-2 gap-2'>
-                {
-                    VoucherOBJ.map((item,index)=>(
-                        <main key={index} 
-                            className='bg-[gray] w-full'
-                        >
-                            <div className=''>
-                                <Image src={item.url} alt='' height={100} width={100} />
-                            </div>
-                            <div className=''>
+    const handleUseVoucher = (id: string) => {
+        dispatch(setVoucherID(id));
+        dispatch(setisVoucher());
+        
+        handleClose()
+    }
 
-                            </div>
-                        </main>
-                    ))
-                }
-            </div>
-            <button onClick={handleClose}>close</button>
+    return (
+        <dialog ref={voucherRef} className='w-[90%] p-2 h-[40vh] '>
+           <div className='h-full w-full flex flex-col'>
+               <div className='h-[80%] w-full overflow-y-scroll'>
+                    {
+                        VoucherOBJ.length > 0 ? (
+                            VoucherOBJ.map((item,index)=>(
+                                <main key={index} className='relative h-[90px] w-full flex bg-[#cacaca] mb-2'>
+                                    <div 
+                                        className='relative w-[70%] h-full flex items-center justify-center'
+                                    >   
+                                        <div className='absolute w-[20%] top-0 left-0 bg-[#aaaaaa] p-2 font-roboto2'>{item.discount+'%'}</div>
+                                        <Image src={item.url} alt='' height={80} width={130}/>
+                                    </div>
+                                    <div 
+                                        className='w-[30%] h-full flex justify-center items-center bg-[#b1b0b0]'
+                                    >
+                                        <button onClick={()=>handleUseVoucher(item.id)} className='p-2 font-roboto2'>use</button>
+                                    </div>
+                                </main>
+                            ))
+                        ): <div>No Vouchers yet</div>
+                    }
+               </div>
+               <div className='h-[20%] flex items-center'>
+                    <button 
+                        onClick={handleClose} 
+                        className='bg-[#bebebe] h-[60%] w-[40%] font-roboto2'
+                    >Close</button>
+               </div>
+           </div>
         </dialog>
     );
 };

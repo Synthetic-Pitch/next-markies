@@ -11,7 +11,7 @@ const Page:React.FC = async () => {
     return (
     <div className='relative z-0  overflow-hidden'>
         {/* FOR SMALL SCREEN */}
-        <div className=''>
+        <div className='' >
             <SmallScreen/>
             <Slider/>
             <Sales/>

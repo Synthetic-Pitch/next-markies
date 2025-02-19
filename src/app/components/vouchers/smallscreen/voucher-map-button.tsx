@@ -2,20 +2,40 @@
 
 import { VoucherClaim } from '@/app/action/action'
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {setVoucherObj} from '@/app/redux/order'
 
 type Props = {
     id: string
 }
 
+type DATA = {
+    url:string,
+    discount:number
+    freeShipping:boolean
+    id:string
+}
+
+type State = {
+    order:{
+        voucher_Obj:DATA[]
+    }
+}
 
 const VoucherMapButton: React.FC<Props> = ({ id }) => {
     const btnRef = useRef<HTMLButtonElement>(null);
     const dispatch = useDispatch();
+    const Obj = useSelector((state:State) =>state.order.voucher_Obj)
 
-    
     const handleClaim = async (id: string) => {
+        
+        const voucherExist = Obj.some((item)=> item.id === id);
+
+        if(voucherExist){
+            return alert('You can only claim one!')
+            
+        }
+        
         
         
         if (btnRef.current) {
@@ -35,14 +55,15 @@ const VoucherMapButton: React.FC<Props> = ({ id }) => {
                 {
                     url:result.toPlain?.url as string,
                     discount:result.toPlain?.disount as number,
-                    freeShipping:result.toPlain?.freeShipping as boolean
+                    freeShipping:result.toPlain?.freeShipping as boolean,
+                    id:id
                 }
             ))
             
         }
        
     }
-
+    
     return (
         <button
             ref={btnRef}

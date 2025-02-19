@@ -24,10 +24,15 @@ const Payment = () => {
     const handleClose = ()=>{
         dispatch(setPayment())
     }
-
+    
     return (
         <dialog ref={Ref} className='w-[80vw] sm:w-[400px]'>
             <h2 className='font-roboto2 text-xl'>Payment</h2>
+            <div>
+                <div>daws</div>
+                <div>asd</div>
+                <div>ad2asd</div>
+            </div>
             <button onClick={handleClose}>Close</button>
         </dialog>
     );

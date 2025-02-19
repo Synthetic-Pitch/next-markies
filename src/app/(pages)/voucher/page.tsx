@@ -5,11 +5,12 @@ import React from 'react';
 
 const Voucher = () => {
     
-    
     return (
         <div>
             <div>
+                
                 <VoucherMap/>
+                
             </div>
         </div>
     )

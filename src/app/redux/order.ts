@@ -10,7 +10,11 @@ type State = {
         _id: string;
         quantity:number;
     }[];
-    subTotal: number;
+    subTotal: {
+        totalAmount:number,
+        voucherID:string,
+        isVoucher:boolean
+    },
     isCurrentAt: 'default' | 'mainDish' | 'desert' | 'beverage'
     payment:boolean
     voucher:boolean
@@ -18,12 +22,17 @@ type State = {
         url:string,
         discount:number
         freeShipping:boolean
+        id:string
     }[];
 };
 
 export const initialState: State = {
     order_Obj: [], // ✅ Start with an empty array
-    subTotal: 0,
+    subTotal: {
+        totalAmount:0,
+        voucherID:'',
+        isVoucher:false
+    },
     isCurrentAt:'default',
     payment:false,
     voucher:false,
@@ -66,6 +75,16 @@ const OrderSlice = createSlice({
         },
         setVoucherObj: (state,action) => {
             state.voucher_Obj.push(action.payload)
+        },
+        setDeleteIDVoucherObj : (state,action) =>{
+            state.voucher_Obj = state.voucher_Obj.filter(order => order.id !== action.payload);
+        },
+        setVoucherID : (state,action)=>{
+            state.subTotal.voucherID = action.payload
+        },
+        
+        setisVoucher : (state) => {
+            state.subTotal.isVoucher = true
         }
         
         
@@ -75,6 +94,7 @@ const OrderSlice = createSlice({
 export const { 
     setOrder,incrementQuantity,decrementQuantity,
     removeItem,setCurrentAt,setPayment,
-    setVoucher,setVoucherObj
+    setVoucher,setVoucherObj,setDeleteIDVoucherObj,setVoucherID
+    ,setisVoucher
 } = OrderSlice.actions;
 export default OrderSlice.reducer
