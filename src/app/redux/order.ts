@@ -1,6 +1,7 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 
 
+
 type State = {
     order_Obj: {
         name: string;
@@ -17,6 +18,7 @@ type State = {
     },
     isCurrentAt: 'default' | 'mainDish' | 'desert' | 'beverage'
     payment:boolean
+    paymentMethod:string,
     voucher:boolean
     voucher_Obj:{
         url:string,
@@ -24,6 +26,7 @@ type State = {
         freeShipping:boolean
         id:string
     }[];
+    checkoutPanel:boolean;
 };
 
 export const initialState: State = {
@@ -35,8 +38,11 @@ export const initialState: State = {
     },
     isCurrentAt:'default',
     payment:false,
+    paymentMethod:'',
     voucher:false,
-    voucher_Obj:[]
+    voucher_Obj:[],
+    checkoutPanel:false,
+    
 };
 
 const OrderSlice = createSlice({
@@ -79,14 +85,25 @@ const OrderSlice = createSlice({
         setDeleteIDVoucherObj : (state,action) =>{
             state.voucher_Obj = state.voucher_Obj.filter(order => order.id !== action.payload);
         },
-        setVoucherID : (state,action)=>{
+        setVoucherID : (state,action:PayloadAction<string>)=>{
             state.subTotal.voucherID = action.payload
         },
-        
         setisVoucher : (state) => {
             state.subTotal.isVoucher = true
+        },
+        setisVoucherFalse : (state) => {
+            state.subTotal.isVoucher = false
+        },
+        setPaymentMethod : (state,action) => {
+            state.paymentMethod = action.payload
+        },
+        setCheckoutPanel : (state,action) => {
+            state.checkoutPanel = action.payload 
+        },
+        resetOrder : (state) => {
+            state.voucher_Obj = [];
+            state.order_Obj = [];
         }
-        
         
     }
 });
@@ -95,6 +112,7 @@ export const {
     setOrder,incrementQuantity,decrementQuantity,
     removeItem,setCurrentAt,setPayment,
     setVoucher,setVoucherObj,setDeleteIDVoucherObj,setVoucherID
-    ,setisVoucher
+    ,setisVoucher,setPaymentMethod,setisVoucherFalse,
+    setCheckoutPanel,resetOrder
 } = OrderSlice.actions;
 export default OrderSlice.reducer

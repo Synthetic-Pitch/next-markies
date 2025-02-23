@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import "./style.css"
 import { incrementQuantity,decrementQuantity,removeItem } from '@/app/redux/order'
+import { useRouter } from 'next/navigation';
 
 type Data = {
     name:string
@@ -26,7 +27,7 @@ const OrderMap = () => {
     const dispatch = useDispatch();
     const [isAnimate,setAnimate] = useState<Set<string>>(new Set());
     const isSelected = useSelector((state:State) => state.order.isCurrentAt);
-
+    const router = useRouter();
     const Increment = (id:string) => {
         dispatch(incrementQuantity(id));
     }
@@ -55,7 +56,11 @@ const OrderMap = () => {
                         key={index}
                         className={`min-h-[120px] w-[95%] bg-[#dbdbdb] flex flex-col sxs:flex-row ${isAnimate.has(item._id) ? 'order-map-remove-item' : ''}`}
                     >
-                        <figure className='w-full sxs:w-[40%] h-[120px] bg-[#b3b3b3] flex justify-center'>
+                        <figure 
+                            onClick={()=>router.push(`/order/${item._id}`)
+                            }
+                            className='w-full sxs:w-[40%] h-[120px] bg-[#b3b3b3] flex justify-center'
+                        >
                             <div className='h-full w-[60%] sxs:w-full relative'>
                                 <Image
                                     src={item.url} alt=''

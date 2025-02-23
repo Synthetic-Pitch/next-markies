@@ -7,6 +7,7 @@ import UploadProgress from './modal-components/upload-progress';
 import SuccesUpload from './modal-components/succes-upload';
 import Payment from './modal-components/payment';
 import Voucher from './modal-components/voucher';
+import CheckoutFinalize from './modal-components/checkout-finalize';
 
 
 type State = {
@@ -50,6 +51,7 @@ const ModalContainer = () => {
             <SuccesUpload/>
             <Payment/>
             <Voucher/>
+            <CheckoutFinalize/>
         </main>
     );
 };

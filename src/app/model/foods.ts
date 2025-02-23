@@ -3,8 +3,10 @@ import mongoose,{Schema,Document,Model} from "mongoose";
 
 export interface IFoods extends Document{
     name:string;
-    pricle:number;
-    url:string
+    price:number;
+    url:string;
+    description:string;
+    category:string;
 }
 
 const foodSchema :Schema = new Schema({

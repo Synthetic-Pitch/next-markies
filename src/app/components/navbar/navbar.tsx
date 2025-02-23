@@ -14,6 +14,7 @@ const Navbar = () => {
             
             {/* small screen */}
             <nav 
+               suppressHydrationWarning
                className='absolute h-full w-full flex justify-between items-center sm:hidden '
             >
                <div className='text-3xl font-roboto2 pl-2 select-none'>markies</div>

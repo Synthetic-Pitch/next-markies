@@ -13,6 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        
         className={`
           ${customFont1.variable} ${customFont2.variable} 
           ${customFont3.variable} ${customFont4.variable} 

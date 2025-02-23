@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {setVoucher,setVoucherID,setisVoucher} from '@/app/redux/order'
+import {setVoucher,setVoucherID,setisVoucher,setisVoucherFalse} from '@/app/redux/order'
 import Image from 'next/image';
 
 type Data = {
@@ -17,7 +17,6 @@ type State = {
         voucher_Obj:Data[]
     }
 }
-
 
 const Voucher = () => {
     const voucher = useSelector((state:State)=>state.order.voucher)
@@ -39,10 +38,11 @@ const Voucher = () => {
     const handleUseVoucher = (id: string) => {
         dispatch(setVoucherID(id));
         dispatch(setisVoucher());
-        
         handleClose()
     }
-
+    const handleRemoveVoucher = () => {
+        dispatch(setisVoucherFalse());
+    }
     return (
         <dialog ref={voucherRef} className='w-[90%] p-2 h-[40vh] '>
            <div className='h-full w-full flex flex-col'>
@@ -67,11 +67,15 @@ const Voucher = () => {
                         ): <div>No Vouchers yet</div>
                     }
                </div>
-               <div className='h-[20%] flex items-center'>
+               <div className='h-[20%] flex items-center justify-between'>
                     <button 
                         onClick={handleClose} 
                         className='bg-[#bebebe] h-[60%] w-[40%] font-roboto2'
                     >Close</button>
+                    <button
+                        onClick={handleRemoveVoucher}
+                        className='bg-[#bebebe] min-h-[60%] w-[40%] font-roboto2 text-center'
+                    >remove voucher</button>
                </div>
            </div>
         </dialog>
