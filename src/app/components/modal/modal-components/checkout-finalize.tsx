@@ -14,7 +14,7 @@ const CheckoutFinalize = () => {
     const CheckoutPanel = useSelector((state:State)=>state.order.checkoutPanel)
     const dispatch = useDispatch();
     const CheckoutModal = useRef<HTMLDialogElement>(null);
-    
+
     useEffect(()=>{
         if(CheckoutPanel){
             CheckoutModal.current?.showModal();
@@ -29,9 +29,12 @@ const CheckoutFinalize = () => {
         dispatch(setCheckoutPanel(false));
     }
     return (
-        <dialog ref={CheckoutModal}>
+        <dialog ref={CheckoutModal} className='outline-none'>
             <h2>Confirm your order?</h2>
-            <button onClick={handleConfirm}>yes</button>
+            <button 
+                onClick={handleConfirm}
+                className='border-[1px] border-[gray] px-4 outline-none rounded-xl mt-2'
+            >yes</button>
         </dialog>
     );
 };
