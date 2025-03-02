@@ -39,10 +39,10 @@ const Slide:React.FC = () => {
     
     return (
       <div 
-        className={`absolute top-[100%] z-50 bg-gradient-to-b from-[#a8a8a8] to-[#3d3d3d] w-[50vw] h-[100dvh] transition-[left] duration-500 ease-in-out ${Slide ? '-left-[0%]': '-left-[100%]'} `}
+        className={`absolute top-[100%] z-50 bg-gradient-to-b from-[#a8a8a8] to-[#3d3d3d] w-full sxs:w-[200px] h-[100dvh] transition-[left] duration-500 ease-in-out ${Slide ? '-left-[0%]': '-left-[100%]'} sm:w-[30vw] md:w-[25vw] lg:w-[240px]`}
       >
         <ul className='flex flex-col items-center pt-4 font-poppins select-none z-50'>
-          
+
           <Link 
             onClick={handleDispatch}
             className='py-4 px-8 ' href={"/"}
@@ -65,7 +65,7 @@ const Slide:React.FC = () => {
           
           <Link 
             onClick={handleDispatch} 
-            className='py-4 px-8' href={"/order"}
+            className='py-4 px-8 sm:hidden' href={"/order"}
           >Order</Link>
           <Link 
             onClick={handleDispatch} 
@@ -74,7 +74,7 @@ const Slide:React.FC = () => {
 
           <Link
             onClick={handleDispatch}
-            className='py-4 px-8' href={"/profile"}
+            className='py-4 px-8 sm:hidden' href={"/profile"} 
           >Profile</Link>
 
           <div

@@ -79,13 +79,13 @@ const MainDishProductLayout:React.FC<Prop> = ({products}) => {
     }
     
     return (
-        <main className='grid grid-cols-1 sxs:grid-cols-2 xs:grid-cols-3 px-1 mb-2'>
+        <main className='grid grid-cols-1 sxs:grid-cols-2 xs:grid-cols-3 px-auto mb-2 justify-items-center emd:px-[4vw] lg:grid-cols-4 lg:gap-y-4'>
             {
                 products.map((item:Data,index:number)=>(
                     
                     <div
                         
-                        className='h-[200px] w-full flex justify-center items-center'
+                        className='h-[200px] w-full sm:max-w-[260px] sm:h-[220px] flex justify-center items-center'
                         onClick={() => handleDispatch({
                             name:item.name,
                             price:item.price,

@@ -23,7 +23,13 @@ export default {
       },
       screens:{
         xs:'546px',
-        sxs:'308px'
+        sxs:'308px',
+        sm:'640px',
+        md:'768px',
+        emd:'865px',
+        lg:'1024px',
+        xl:'1280px',
+        '2xl':'1536px'
       }
     },
   },

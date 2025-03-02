@@ -58,9 +58,9 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
         <div className="flex flex-col">
             <div className="flex">
                 
-                <div className="flex items-center " onClick={()=>setBtn(!btn)}>
+                <div className="flex items-center cursor-pointer" onClick={()=>setBtn(!btn)}>
                     <h2 
-                        className="tracking-wider font-roboto2 pl-2 relative "
+                        className="tracking-wider font-roboto2 pl-2 relative lg:pl-6 "
                     >filter</h2>
                     <div className="flex items-center"><CiFilter/></div>
                 </div>
