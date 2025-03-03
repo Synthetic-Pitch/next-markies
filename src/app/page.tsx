@@ -23,7 +23,7 @@ const Page:React.FC = async () => {
             <Sales/>
             <Footer/>
         </div>
-
+        
         {/* {FOR MEDIUM SCREEN} */}
         <div className='relative z-0 hidden sm:block lg:hidden'>
             <MediumScreen/>
@@ -33,7 +33,7 @@ const Page:React.FC = async () => {
         </div>
 
         {/* {FOR LARGE SCREEN} */}
-        <div className='hidden relative z-0 lg:block '>
+        <div className='hidden relative z-0 lg:block'>
             <MediumScreen/>
             <ScrollerLarger/>
             <SalesMedium/>

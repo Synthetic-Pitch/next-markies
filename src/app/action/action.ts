@@ -94,13 +94,12 @@ export async function VoucherClaim(id: string) {
             return { success: false, message: 'Voucher not found or out of stock' };
         }
         
-        
         const toPlain = {
             url:VoucherID.url,
             disount:VoucherID.discount,
             freeShipping:VoucherID.freeShipping,
         }
-
+        
         revalidatePath('/vouchers');
 
         return { 
