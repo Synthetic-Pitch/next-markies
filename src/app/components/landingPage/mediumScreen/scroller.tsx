@@ -19,7 +19,7 @@ const ScrollerMedium = () => {
     { id: 6, src: "/assets/landingPage/scroll-6.jpg" },
     { id: 7, src: "/assets/landingPage/scroll-7.jpg" },
   ], []);
-
+  
   useEffect(() => {
     const checkIntersection = () => {
       if (!lineRef.current || !parentRef.current) return;

@@ -38,6 +38,7 @@ const Page:React.FC = async () => {
             <ScrollerLarger/>
             <SalesMedium/>
             <Sales2/>
+            <Footer/>
         </div>
     </div>
    )

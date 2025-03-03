@@ -21,7 +21,7 @@ const OrderProfile = () => {
             >Profile</h1>
             <h1 
                 className='hidden h-full lg:flex items-center cursor-pointer'
-                onClick={()=>router.push('/profile')}
+                onClick={()=>router.push('/voucher')}
             >Voucher</h1>
         </div>
     );

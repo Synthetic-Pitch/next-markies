@@ -42,4 +42,10 @@ export const customFont7 = localFont(
         variable:"--poppins"
     }
 )
+export const customFont8 = localFont(
+    {
+        src:'../../../public/fonts/PlaywriteITModerna-VariableFont_wght.ttf',
+        variable:"--playwrite"
+    }
+)
 

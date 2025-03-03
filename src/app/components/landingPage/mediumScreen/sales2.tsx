@@ -50,14 +50,16 @@ const Sales2 = () => {
                 <aside
                     className='w-[50%] h-full flex items-center justify-center'
                 >
-                    <div className='w-full h-full overflow-hidden flex justify-center items-center relative'>
+                    <div className='w-full h-full overflow-hidden flex flex-col justify-center items-center relative'>
                         <Image 
                             src='/assets/landingPage/board.png' alt='' 
                             height={400} width={400}
                             className='-mt-36'
                         />
                         <div className='absolute text-6xl font-poppins text-[white] -mt-5'>&#x20B1; 82 only</div>
+                        <h2 className='font-playwrite text-2xl'>-the cocktail in town</h2>
                     </div>
+                    
                 </aside>
             </main>
         </div>
