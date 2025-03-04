@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import "../smallScreen/style.css"
 import { incrementQuantity,decrementQuantity,removeItem } from '@/app/redux/order'
 import { useRouter } from 'next/navigation';
+import OrderAside from './order-aside';
 
 type Data = {
     name:string
@@ -47,9 +48,10 @@ const OrderMap = () => {
         }, 500);
     }
     
-    return (
-        <div className='flex p-2 h-full '>
-            <map className='flex flex-col items-center w-[60%] gap-2 overflow-y-scroll'>
+    return order.length > 0 && (
+        
+        <div className=' p-2 h-full flex justify-center'>
+            <map className='flex flex-col items-center w-[60%] max-w-[651px] gap-2 overflow-y-scroll'>
                 {
                     order.length > 0 && isSelected === 'default'  && 
                     order.map((item,index)=>(
@@ -61,19 +63,19 @@ const OrderMap = () => {
                                 onClick={
                                     ()=>router.push(`/order/${item._id}`)
                                 }
-                                className='w-full sxs:w-[40%] h-[150px] bg-[#b3b3b3]'
+                                className='w-full sxs:w-[30%] h-[150px] bg-[#b3b3b3]'
                             >
                                 <div className='h-full w-[60%] sxs:w-full relative flex justify-center items-center'>
                                     <Image
                                         src={item.url} alt=''
-                                        height={80} width={240}
-                                        className='max-h-[90%]'
+                                        fill
+                                        className=' object-cover'
                                         
                                     />
                                 </div>
                             </figure>
                             
-                            <aside className='flex flex-col h-[120px] pl-4 py-2 w-full sxs:w-[60%] box-border overflow-x-hidden'>
+                            <aside className='flex flex-col h-[120px] pl-4 py-2 w-full sxs:w-[70%] box-border overflow-x-hidden'>
                                 <header
                                     className='h-[25%] flex items-center font-roboto2 text-xl relative overlow-hidden'
                                 >
@@ -92,12 +94,12 @@ const OrderMap = () => {
                                     >
                                     <button
                                         onClick={()=>Increment(item._id)}
-                                        className='h-[90%] w-[17%] bg-[#b3b2b2] '
+                                        className='h-[90%] w-[17%] max-w-[50px] bg-[#b3b2b2] '
                                     >+</button>
                                     <h3 className='font-roboto2 px-2 text-[#636363]'>{item.quantity}</h3>
                                     <button 
                                         onClick={()=>Decrement(item._id)}
-                                        className='h-[90%] w-[17%] bg-[#b3b2b2] '
+                                        className='h-[90%] w-[17%] max-w-[50px] bg-[#b3b2b2] '
                                     >&#8722;</button>
 
                                     <button 
@@ -109,12 +111,9 @@ const OrderMap = () => {
                         </main>
                     ))
                 }
-            </map>
-            <aside
-                className='w-[40%] h-full bg-[#dbdbdb]'
-            >
                 
-            </aside>
+            </map>
+            <OrderAside/>
         </div>
     );
 };

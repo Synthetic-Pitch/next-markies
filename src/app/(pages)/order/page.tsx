@@ -16,7 +16,7 @@ const Page = () => {
             
             {/* SMALL SCREEN */}
             <div className=' h-[calc(100dvh-64px)] flex flex-col overflow-hidden md:hidden'>
-
+                
                 <div className='w-full h-[calc(100%-150px)] py-2 overflow-y-scroll'>
                     <OrderMap/>
                     <MainDishWrapper>

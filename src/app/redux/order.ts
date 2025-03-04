@@ -2,6 +2,7 @@ import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 
 
 
+
 type State = {
     order_Obj: {
         name: string;
@@ -94,6 +95,10 @@ const OrderSlice = createSlice({
         setisVoucherFalse : (state) => {
             state.subTotal.isVoucher = false
         },
+        setFreeShipping : (state) => {
+            state.subTotal = state.subTotal
+        }
+        ,
         setPaymentMethod : (state,action) => {
             state.paymentMethod = action.payload
         },

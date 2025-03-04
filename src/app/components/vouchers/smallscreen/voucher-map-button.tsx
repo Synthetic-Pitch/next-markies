@@ -59,9 +59,7 @@ const VoucherMapButton: React.FC<Props> = ({ id }) => {
                     id:id
                 }
             ))
-            
         }
-       
     }
     
     return (

@@ -14,7 +14,8 @@ type Data = {
 type State = {
     order:{
         voucher:boolean,
-        voucher_Obj:Data[]
+        voucher_Obj:Data[],
+
     }
 }
 
@@ -39,12 +40,16 @@ const Voucher = () => {
         dispatch(setVoucherID(id));
         dispatch(setisVoucher());
         handleClose()
+        
     }
     const handleRemoveVoucher = () => {
         dispatch(setisVoucherFalse());
+        handleClose();
+        
     }
+
     return (
-        <dialog ref={voucherRef} className='w-[90%] p-2 h-[40vh] '>
+        <dialog ref={voucherRef} className='w-[90%] p-2 h-[40vh] max-w-[400px] '>
            <div className='h-full w-full flex flex-col'>
                <div className='h-[80%] w-full overflow-y-scroll'>
                     {
@@ -52,7 +57,7 @@ const Voucher = () => {
                             VoucherOBJ.map((item,index)=>(
                                 <main key={index} className='relative h-[90px] w-full flex bg-[#cacaca] mb-2'>
                                     <div 
-                                        className='relative w-[70%] h-full flex items-center justify-center'
+                                        className='relative w-[70%] h-full flex items-center justify-center overflow-hidden'
                                     >   
                                         <div className='absolute w-[20%] top-0 left-0 bg-[#aaaaaa] p-2 font-roboto2'>{item.discount+'%'}</div>
                                         <Image src={item.url} alt='' height={80} width={130}/>
