@@ -15,7 +15,9 @@ type State = {
     order:{
         voucher:boolean,
         voucher_Obj:Data[],
-
+        subTotal:{
+            isVoucher:boolean
+        }
     }
 }
 
@@ -24,7 +26,7 @@ const Voucher = () => {
     const dispatch = useDispatch();
     const voucherRef = useRef<HTMLDialogElement>(null);
     const VoucherOBJ = useSelector((state:State)=> state.order.voucher_Obj)
-
+    const SubTotal = useSelector((state:State)=>state.order.subTotal.isVoucher);
     
     useEffect(()=>{
         if(voucher){
@@ -63,9 +65,10 @@ const Voucher = () => {
                                         <Image src={item.url} alt='' height={80} width={130}/>
                                     </div>
                                     <div 
+                                        onClick={()=>handleUseVoucher(item.id)}
                                         className='w-[30%] h-full flex justify-center items-center bg-[#b1b0b0]'
                                     >
-                                        <button onClick={()=>handleUseVoucher(item.id)} className='p-2 font-roboto2'>use</button>
+                                        <button  className='p-2 font-roboto2'>use</button>
                                     </div>
                                 </main>
                             ))
@@ -77,10 +80,13 @@ const Voucher = () => {
                         onClick={handleClose} 
                         className='bg-[#bebebe] h-[60%] w-[40%] font-roboto2'
                     >Close</button>
-                    <button
+                    { 
+                        SubTotal &&
+                        <button
                         onClick={handleRemoveVoucher}
                         className='bg-[#bebebe] min-h-[60%] w-[40%] font-roboto2 text-center'
-                    >remove voucher</button>
+                        >remove voucher</button>
+                    }
                </div>
            </div>
         </dialog>

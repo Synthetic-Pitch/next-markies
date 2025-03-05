@@ -103,11 +103,16 @@ const OrderSlice = createSlice({
             state.paymentMethod = action.payload
         },
         setCheckoutPanel : (state,action) => {
-            state.checkoutPanel = action.payload 
+            state.checkoutPanel = action.payload
         },
         resetOrder : (state) => {
             state.voucher_Obj = [];
             state.order_Obj = [];
+            state.subTotal = {
+                totalAmount:0,
+                voucherID:'',
+                isVoucher:false
+            }
         }
         
     }

@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import "../smallScreen/style.css"
 import { incrementQuantity,decrementQuantity,removeItem } from '@/app/redux/order'
 import { useRouter } from 'next/navigation';
-import OrderAside from './order-aside';
+
+
 
 type Data = {
     name:string
@@ -19,11 +20,12 @@ type Data = {
 type State = {
     order:{
         order_Obj: Data[]
-        isCurrentAt:string
+        isCurrentAt:string,
     }
 }
 
 const OrderMap = () => {
+    const isCurrentAt = useSelector((state:State) => state.order.isCurrentAt);
     const order = useSelector((state:State) => state.order.order_Obj);
     const dispatch = useDispatch();
     const [isAnimate,setAnimate] = useState<Set<string>>(new Set());
@@ -50,14 +52,15 @@ const OrderMap = () => {
     
     return order.length > 0 && (
         
-        <div className=' p-2 h-full flex justify-center'>
-            <map className='flex flex-col items-center w-[60%] max-w-[651px] gap-2 overflow-y-scroll'>
+        isCurrentAt === 'default' && (
+            <map 
+                className='flex flex-col items-center flex-shrink-0 gap-2 overflow-y-scroll w-full py-2'>
                 {
                     order.length > 0 && isSelected === 'default'  && 
                     order.map((item,index)=>(
                         <main
                             key={index}
-                            className={`min-h-[150px] w-[90%] bg-[#dbdbdb] flex flex-col items-center sxs:flex-row ${isAnimate.has(item._id) ? 'order-map-remove-item' : ''} flex-shrink-0 p-2`}
+                            className={`min-h-[150px] w-[90%] max-w-[651px] bg-[#dbdbdb] flex flex-col items-center sxs:flex-row ${isAnimate.has(item._id) ? 'order-map-remove-item' : ''} flex-shrink-0 p-2`}
                         >
                             <figure
                                 onClick={
@@ -111,10 +114,10 @@ const OrderMap = () => {
                         </main>
                     ))
                 }
-                
+        
             </map>
-            <OrderAside/>
-        </div>
+        )
+
     );
 };
 

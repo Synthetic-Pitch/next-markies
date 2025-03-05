@@ -5,9 +5,12 @@ import OrderMap2 from '@/app/components/order/largeScreen/order-map';
 import OrderMore from '@/app/components/order/smallScreen/order-more';
 import React from 'react';
 import { MainDishWrapper, DesertWrapper,BeverageWrapper } from '../../components/order/smallScreen/wrapper';
+import {MainDishWrapperOrder,DesertWrapperOrder,BeverageWrapperOrder} from '../../components/order/largeScreen/wrapper'
 import MainDish from '@/app/components/product-map/mainDish';
 import Desert from '@/app/components/product-map/desert';
 import Beverage from '@/app/components/product-map/beverage';
+import OrderAside from '@/app/components/order/largeScreen/order-aside';
+
 
 const Page = () => {
     return (
@@ -33,8 +36,22 @@ const Page = () => {
             </div>
 
             {/* MEDIUM SCREEN */}
-            <div className='hidden h-[calc(100dvh-64px)] md:flex flex-col overflow-hidden'>
-                <OrderMap2/>
+            <div className='hidden h-[calc(100dvh-64px)] md:flex justify-center overflow-hidden'>
+                <div className='w-full max-w-[1220px] flex'>
+                    <div className='w-[60%] flex'>
+                        <OrderMap2/>
+                        <MainDishWrapperOrder>
+                            <MainDish/>
+                        </MainDishWrapperOrder>
+                        <DesertWrapperOrder>
+                            <Desert/>
+                        </DesertWrapperOrder>
+                        <BeverageWrapperOrder>
+                            <Beverage/>
+                        </BeverageWrapperOrder>
+                    </div>
+                    <OrderAside/>
+                </div>
             </div>
         </div>
     );

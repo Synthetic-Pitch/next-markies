@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {setOrder} from '@/app/redux/order'
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import './style.css'
 type Data = {
     name:string
@@ -29,6 +29,9 @@ const MainDishProductLayout:React.FC<Prop> = ({products}) => {
     const order = useSelector((state:State)=>state.order.order_Obj);
     const route = useRouter();
     const [isAdded,setAdd] = useState<Set<string>>(new Set());
+    const pathname = usePathname();
+
+
 
     const handleDispatch = ({name,price,description,url,_id}:Data) =>{
         
@@ -79,12 +82,11 @@ const MainDishProductLayout:React.FC<Prop> = ({products}) => {
     }
     
     return (
-        <main className='grid grid-cols-1 sxs:grid-cols-2 xs:grid-cols-3 px-auto mb-2 justify-items-center emd:px-[4vw] lg:grid-cols-4 lg:gap-y-4'>
+        <main 
+            className={`grid px-auto mb-2 justify-items-center emd:px-[4vw]  lg:gap-y-4 ${pathname === '/order' ? 'grid-cols-3':'grid-cols-1 sxs:grid-cols-2 xs:grid-cols-3 lg:grid-cols-4' }`}>
             {
                 products.map((item:Data,index:number)=>(
-                    
                     <div
-                        
                         className='h-[200px] w-full sm:max-w-[260px] sm:h-[220px] flex justify-center items-center'
                         onClick={() => handleDispatch({
                             name:item.name,

@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import OrderCheckout from './order-checkout';
 import { useDispatch, useSelector } from 'react-redux';
-import {setVoucher,setPayment} from '@/app/redux/order'
+
+import {setVoucher,setPayment,setCurrentAt} from '@/app/redux/order'
+
 
 type Data = {
     name:string,
@@ -23,6 +25,7 @@ type State = {
             voucherID:string,
             isVoucher:boolean
         }
+        paymentMethod:string
     }
 }
 
@@ -30,6 +33,7 @@ const OrderAside = () => {
     const order = useSelector((state:State)=>state.order.order_Obj);
     const VoucherObj = useSelector((state:State)=>state.order.voucher_Obj);
     const subTotalRedux = useSelector((state:State)=>state.order.subTotal);
+    const paymentMethod = useSelector((state:State)=>state.order.paymentMethod);
     const [shippingFee, setShippingFee] = useState<string>('50');
     const [total,setTotal] = useState<number>();
     const [subTotal,setSubTotal] = useState<number>();
@@ -58,24 +62,35 @@ const OrderAside = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[order,subTotalRedux.isVoucher,subTotalRedux.voucherID])
     
-    return (
+    return order.length > 0 && (
         <div
-            className='w-[40%] h-full bg-[#cecece] max-w-[505px]'
+            className='w-[40%] h-full bg-[#cecece]'
         >
-            <header className='w-full flex justify-evenly py-4 bg-[#b8b8b8]'>
-                <li 
-                    onClick={()=>{}}
-                    className='list-none h-[50px] w-[27%] rounded-3xl bg-[#7c7c7c] text-white flex items-center justify-center font-poppins cursor-pointer hover:scale-[1.1] transition-all duration-2'>
-                    MainDish
-                </li>
-                <li 
-                    className='list-none h-[50px] w-[27%] rounded-3xl bg-[#7c7c7c] text-white flex items-center justify-center font-poppins cursor-pointer hover:scale-[1.1] transition-all duration-2'>
-                    Desert
-                </li>
-                <li 
-                    className='list-none h-[50px] w-[27%] rounded-3xl bg-[#7c7c7c] text-white flex items-center justify-center font-poppins cursor-pointer hover:scale-[1.1] transition-all duration-2'>
-                    Beverage
-                </li>
+            <header className='w-full flex flex-wrap justify-evenly py-4 bg-[#b8b8b8] gap-4'>
+                <section className='w-full flex justify-evenly'>
+                    <li 
+                        onClick={()=>dispatch(setCurrentAt('mainDish'))}
+                        className='list-none h-[46px] w-[27%] rounded-3xl bg-[#7c7c7c] text-white flex items-center justify-center font-poppins cursor-pointer hover:scale-[1.1] transition-all duration-2'>
+                        MainDish
+                    </li>
+                    <li 
+                        onClick={()=>dispatch(setCurrentAt('desert'))}
+                        className='list-none h-[46px] w-[27%] rounded-3xl bg-[#7c7c7c] text-white flex items-center justify-center font-poppins cursor-pointer hover:scale-[1.1] transition-all duration-2'>
+                        Desert
+                    </li>
+                </section>
+                <section className='w-full flex justify-evenly'>
+                    <li 
+                        onClick={()=>dispatch(setCurrentAt('beverage'))}
+                        className='list-none h-[46px] w-[27%] rounded-3xl bg-[#7c7c7c] text-white flex items-center justify-center font-poppins cursor-pointer hover:scale-[1.1] transition-all duration-2'>
+                        Beverage
+                    </li>
+                    <li 
+                        onClick={()=>dispatch(setCurrentAt('default'))}
+                        className='list-none h-[46px] w-[27%] rounded-3xl bg-[#7c7c7c] text-white flex items-center justify-center font-poppins cursor-pointer hover:scale-[1.1] transition-all duration-2'>
+                        Order
+                    </li>
+                </section>
             </header>
             <div className='py-2 flex justify-evenly'>
                     
@@ -96,6 +111,11 @@ const OrderAside = () => {
                 {
                     subTotalRedux.isVoucher && (
                         <h2 className='pl-2 text-[13px] font-bold font-poppins text-[#7aa163]'>Voucher Applied</h2>
+                    )
+                }
+                {
+                    paymentMethod.length > 0 && (
+                        <h2 className='pl-2 text-[13px] font-bold font-poppins text-[#6d7469]'>Payment Method : <span className='text-[#7aa163]'>{paymentMethod}</span></h2>
                     )
                 }
                 <h2 className='text-[#505050] pl-2'>Subtotal :&#x20B1; {subTotal}</h2>

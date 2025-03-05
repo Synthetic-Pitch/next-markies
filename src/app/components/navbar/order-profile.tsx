@@ -5,7 +5,7 @@ import React from 'react';
 const OrderProfile = () => {
     const pathname = usePathname();
     const router = useRouter();
-    const pathCondition = (pathname === '/main-dish' || pathname === '/desert' || pathname === '/beverage' ? 'gap-3' : 'ml-[45%] gap-[35%]');
+    const pathCondition = (pathname === '/main-dish' || pathname === '/desert' || pathname === '/beverage' ? 'gap-16' : 'ml-[45%] gap-[35%]');
 
 
     return (

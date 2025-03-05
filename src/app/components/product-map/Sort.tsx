@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import MainDishProductLayout from "../product-layout/smallScreen/mainDish-product-layout";
 import { CiFilter } from "react-icons/ci";
 
+
 type Data = {
     name: string;
     price: string;
@@ -31,6 +32,7 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
     const [btn,setBtn] = useState<boolean>(false)
     const [data ,setData] = useState(fetchData);
 
+    
     useEffect(()=>{
         let updatedData = [...fetchData]; // Start with the full product list
 

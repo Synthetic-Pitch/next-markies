@@ -19,7 +19,7 @@ const SearchBar = () => {
     
     if(pathname === '/main-dish' || pathname === '/desert' || pathname === '/beverage'){
         return (
-            <div className='w-[40%] h-[50%] flex items-center justify-center bg-[white] px-2 rounded-full gap-1'>
+            <div className='w-[30%] h-[50%] flex items-center justify-center bg-[white] px-2 rounded-full gap-1'>
                 
                 <label htmlFor="search"><CiSearch/></label>
                 <input 
