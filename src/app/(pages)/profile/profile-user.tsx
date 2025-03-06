@@ -21,7 +21,7 @@ const ProfileUser = () => {
                 <main className=''>
 
                 </main>
-                {/* {session?.user?.image && (
+                {session?.user?.image && (
                     <figure 
                         className='h-[4rem] w-[4rem] relative'
                         style={{clipPath:'circle(50% at 50% 50%)'}}
@@ -34,7 +34,7 @@ const ProfileUser = () => {
                             priority
                         />
                     </figure>
-                )} */}
+                )}
             </section>
 
             <section className='w-[60%] p-4'>
