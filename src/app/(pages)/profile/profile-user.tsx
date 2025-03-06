@@ -66,7 +66,7 @@ const ProfileUser = () => {
                     
                     />
                     <input 
-                        type="text" placeholder='enter mobile number' 
+                        type="number" placeholder='enter mobile number' 
                         className='w-[50%] px-6 py-2 bg-[#b3b3b3] placeholder:text-[#686868] placeholder:font-poppins rounded-full
                         outline-none'
                     
