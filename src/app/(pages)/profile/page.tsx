@@ -1,10 +1,16 @@
 
+import Google from '@/app/components/Auth/google';
+
 import React from 'react';
 
 const Profile = () => {
+
     return (
         <div>
-            profile
+ 
+            <Google/>
+       
+            
         </div>
     );
 };

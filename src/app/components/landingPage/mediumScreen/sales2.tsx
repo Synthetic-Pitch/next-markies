@@ -56,7 +56,7 @@ const Sales2 = () => {
                             height={400} width={400}
                             className='-mt-36'
                         />
-                        <div className='absolute text-6xl font-poppins text-[white] -mt-5'>&#x20B1; 82 only</div>
+                        <div className='absolute text-6xl font-poppins text-[white] -mt-10'>&#x20B1; 82 only</div>
                         <h2 className='font-playwrite text-2xl'>-the cocktail in town</h2>
                     </div>
                     
