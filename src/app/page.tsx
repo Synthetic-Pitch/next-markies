@@ -14,7 +14,7 @@ import Sales2 from './components/landingPage/mediumScreen/sales2'
 const Page:React.FC = async () => {
     
     return (
-    <div className='relative z-0 overflow-y-scroll '>
+    <div className='relative z-0 overflow-y-scroll overflow-x-hidden'>
 
         {/* FOR SMALL SCREEN */}
         <div className='sm:hidden' >
@@ -25,7 +25,7 @@ const Page:React.FC = async () => {
         </div>
         
         {/* {FOR MEDIUM SCREEN} */}
-        <div className='relative z-0 hidden sm:block lg:hidden'>
+        <div className='relative z-0 hidden sm:block lg:hidden overflow-x-hidden'>
             <MediumScreen/>
             <Slider/>
             <SalesMedium/>
@@ -33,7 +33,7 @@ const Page:React.FC = async () => {
         </div>
 
         {/* {FOR LARGE SCREEN} */}
-        <div className='hidden relative z-0 lg:block'>
+        <div className='hidden relative z-0 lg:block overflow-x-hidden'>
             <MediumScreen/>
             <ScrollerLarger/>
             <SalesMedium/>
