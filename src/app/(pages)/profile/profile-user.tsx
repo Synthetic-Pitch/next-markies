@@ -1,11 +1,31 @@
 'use client'
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { signOut } from 'next-auth/react';
+import { useDispatch, useSelector } from 'react-redux';
+import {setUserName,setAddress,setNumber} from '@/app/redux/user'
+
+type State = {
+   
+    User:{
+        username:string;
+        userAddress:string;
+        userNumber:string
+    }
+}
+
 const ProfileUser = () => {
     const { data: session, status } = useSession();
-    
+    const User = useSelector((state:State)=>state.User)
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        console.log(User.username);
+        
+    },[User])
+
+
     // Handle loading and unauthenticated states
     if (status === 'loading') {
         return <div>Loading...</div>;
@@ -14,7 +34,11 @@ const ProfileUser = () => {
     if (status === 'unauthenticated') {
         return <div>Please log in</div>;
     }
-    
+
+    const handleUser = () => {
+        console.log(User);
+    }
+
     return (
         <div className='flex h-[calc(100dvh-64px)] w-full max-w-[1200px] bg-gray-500'>
             <section className='w-[40%] h-full bg-gray-300 flex justify-center pt-4'>
@@ -51,29 +75,32 @@ const ProfileUser = () => {
                 <p className='text-gray-700'>
                     {session?.user?.email ?? 'No email provided'}
                 </p>
-
+                    
                 <section className='pt-20 flex flex-col gap-6'>
                     <input 
+                        value={User.username}
+                        onChange={(e)=>dispatch(setUserName(e.target.value))}
                         type="text" placeholder='enter name' 
-                        className='w-[50%] px-6 py-2 bg-[#b3b3b3] placeholder:text-[#686868] placeholder:font-poppins rounded-full
+                        className='w-[50%] px-6 py-2 bg-[#b3b3b3] placeholder:text-[#686868] placeholder:font-poppins placeholder:text-sm rounded-full
                         outline-none'
-                    
                     />
                     <input 
+                        value={User.userAddress}
+                        onChange={(e)=>{dispatch(setAddress(e.target.value))}}
                         type="text" placeholder='enter address' 
-                        className='w-[50%] px-6 py-2 bg-[#b3b3b3] placeholder:text-[#686868] placeholder:font-poppins rounded-full
+                        className='w-[50%] px-6 py-2 bg-[#b3b3b3] placeholder:text-[#686868] placeholder:font-poppins placeholder:text-sm rounded-full
                         outline-none'
-                    
                     />
                     <input 
+                        value={User.userNumber}
+                        onChange={(e)=>{dispatch(setNumber(e.target.value))}}
                         type="number" placeholder='enter mobile number' 
-                        className='w-[50%] px-6 py-2 bg-[#b3b3b3] placeholder:text-[#686868] placeholder:font-poppins rounded-full
+                        className='w-[50%] px-6 py-2 bg-[#b3b3b3] placeholder:text-[#686868] placeholder:font-poppins placeholder:text-sm rounded-full
                         outline-none'
-                    
                     />
                 </section>
                 <footer className='flex py-10 px-4'>
-                    <button className='bg-[#b3b3b3] px-10 py-2 text-md text-[#686868] font-poppins hover:scale-[1.1] transition-all'>Save</button>
+                    <button onClick={handleUser} className='bg-[#b3b3b3] px-10 py-2 text-md text-[#686868] font-poppins hover:scale-[1.1] transition-all'>Save</button>
                 </footer>
             </section>
         </div>

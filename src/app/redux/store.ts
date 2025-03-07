@@ -11,6 +11,7 @@ import Modal from './modal'
 import ProductSlice from './product-create';
 import Search from './search';
 import OrderSlice from './order';
+import UserSlice from './user';
 
 const store = configureStore({
     reducer:{
@@ -18,7 +19,8 @@ const store = configureStore({
         Modal:Modal,
         product:ProductSlice,
         search :Search,
-        order:OrderSlice
+        order:OrderSlice,
+        User:UserSlice
     }
 })
 

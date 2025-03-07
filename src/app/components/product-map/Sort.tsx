@@ -31,7 +31,7 @@ const Sort:React.FC<SortData> = ({fetchData}) => {
     const filter = useSelector((state:Filter)=> state.search);
     const [btn,setBtn] = useState<boolean>(false)
     const [data ,setData] = useState(fetchData);
-
+    
     
     useEffect(()=>{
         let updatedData = [...fetchData]; // Start with the full product list
