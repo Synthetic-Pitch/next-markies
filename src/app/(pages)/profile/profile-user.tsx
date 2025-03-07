@@ -25,7 +25,7 @@ const ProfileUser = () => {
         
     },[User])
 
-
+    
     // Handle loading and unauthenticated states
     if (status === 'loading') {
         return <div>Loading...</div>;
